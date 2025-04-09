@@ -1,0 +1,6 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "newsbox": "/components/newsbox/newsbox"
+  }
+}

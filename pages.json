@@ -1,0 +1,247 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "uni-app"
+			}
+		}
+		,
+		
+		{
+			"path" : "pages/user-profile/user-profile",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" : "pages/post-home/post-home",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		}
+	]
+		
+	,
+	"subPackages": [
+		{
+			"root": "pages/employer-input",
+			"pages": [
+				{
+					"path": "employer-input",
+					"style": {
+						"navigationBarTitleText": "招聘帖子"
+					}
+				}
+			]
+		},
+		{
+			"root": "pages/job-search-input",
+			"pages": [
+				{
+					"path": "job-search-input",
+					"style": {
+						"navigationBarTitleText": "求职帖子"
+					}
+				}
+			]
+		},
+		{
+			"root": "pages/dicuss-post-outer",
+			"pages": [
+				{
+					"path": "dicuss-post-outer",
+					"style": {
+						"navigationBarTitleText": "发问帖子"
+					}
+				}
+			]
+		},
+		{
+			"root": "pages/job_search",
+			"pages": [
+				{
+					"path": "job_search",
+					"style": {
+						"navigationBarTitleText": "求职帖子"
+					}
+				}
+			]
+		},
+			
+			{
+				"root": "pages/auction-post",
+				"pages": [
+					{
+						"path": "auction-post",
+						"style": {
+							"navigationBarTitleText": "拍卖帖子"
+						}
+					}
+				]
+			},
+			{
+				"root": "pages/companion-post",
+				"pages": [
+					{
+						"path": "companion-post",
+						"style": {
+							"navigationBarTitleText": "结伴帖子"
+						}
+					}
+				]
+			},
+			{
+				"root": "pages/discussion-post",
+				"pages": [
+					{
+						"path": "discussion-post",
+						"style": {
+							"navigationBarTitleText": "讨论帖子"
+						}
+					}
+				]
+			},
+			{
+				"root": "pages/coper-post",
+				"pages": [
+					{
+						"path": "coper-post",
+						"style": {
+							"navigationBarTitleText": "合作帖子"
+						}
+					}
+				]
+			},
+			{
+				"root": "pages/freelance-post",
+				"pages": [
+					{
+						"path": "freelance-post",
+						"style": {
+							"navigationBarTitleText": "自由职业帖子"
+						}
+					}
+				]
+			},
+			{
+				"root": "pages/auction-detail",
+				"pages": [
+					{
+						"path": "auction-detail",
+						"style": {
+							"navigationBarTitleText": "拍卖详情"
+						}
+					}
+				]
+			},
+			{
+				"root": "pages/discussion-detail",
+				"pages": [
+					{
+						"path": "discussion-detail",
+						"style": {
+							"navigationBarTitleText": "讨论详情"
+						}
+					}
+				]
+			},
+			{
+				"root": "pages/companion-detail",
+				"pages": [
+					{
+						"path": "companion-detail",
+						"style": {
+							"navigationBarTitleText": "结伴详情"
+						}
+					}
+				]
+			}
+		],
+	"easycom": {
+			"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+		},
+
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"usingComponents": {
+		      // "van-action-sheet": "/wxcomponents/vant/action-sheet/index",
+		      // "van-area": "/wxcomponents/vant/area/index",
+		      "van-button": "/wxcomponents/vant/button/index",
+		      "van-card": "/wxcomponents/vant/card/index",
+		      "van-cell": "/wxcomponents/vant/cell/index",
+		      "van-cell-group": "/wxcomponents/vant/cell-group/index",
+		      "van-checkbox": "/wxcomponents/vant/checkbox/index",
+		      "van-checkbox-group": "/wxcomponents/vant/checkbox-group/index",
+		      "van-col": "/wxcomponents/vant/col/index",
+		      "van-dialog": "/wxcomponents/vant/dialog/index",
+		      "van-field": "/wxcomponents/vant/field/index",
+		      "van-goods-action": "/wxcomponents/vant/goods-action/index",
+		      "van-goods-action-icon": "/wxcomponents/vant/goods-action-icon/index",
+		      "van-goods-action-button": "/wxcomponents/vant/goods-action-button/index",
+		      "van-icon": "/wxcomponents/vant/icon/index",
+		      "van-loading": "/wxcomponents/vant/loading/index",
+		      "van-nav-bar": "/wxcomponents/vant/nav-bar/index",
+		      "van-notice-bar": "/wxcomponents/vant/notice-bar/index",
+		      "van-notify": "/wxcomponents/vant/notify/index",
+		      "van-panel": "/wxcomponents/vant/panel/index",
+		      // "van-popup": "/wxcomponents/vant/popup/index",
+		      // "van-progress": "/wxcomponents/vant/progress/index",
+		      // "van-radio": "/wxcomponents/vant/radio/index",
+		      // "van-radio-group": "/wxcomponents/vant/radio-group/index",
+		      // "van-row": "/wxcomponents/vant/row/index",
+		      // "van-search": "/wxcomponents/vant/search/index",
+		      // "van-slider": "/wxcomponents/vant/slider/index",
+		      // "van-stepper": "/wxcomponents/vant/stepper/index",
+		      "van-steps": "/wxcomponents/vant/steps/index",
+		      "van-submit-bar": "/wxcomponents/vant/submit-bar/index",
+		      "van-swipe-cell": "/wxcomponents/vant/swipe-cell/index",
+		      "van-switch": "/wxcomponents/vant/switch/index",
+		      "van-tab": "/wxcomponents/vant/tab/index",
+		      "van-tabs": "/wxcomponents/vant/tabs/index",
+		      "van-tabbar": "/wxcomponents/vant/tabbar/index",
+		      "van-tabbar-item": "/wxcomponents/vant/tabbar-item/index",
+		      "van-tag": "/wxcomponents/vant/tag/index",
+		      "van-toast": "/wxcomponents/vant/toast/index",
+		      "van-transition": "/wxcomponents/vant/transition/index",
+		      "van-tree-select": "/wxcomponents/vant/tree-select/index",
+		      "van-datetime-picker": "/wxcomponents/vant/datetime-picker/index",
+		      "van-rate": "/wxcomponents/vant/rate/index",
+		      "van-collapse": "/wxcomponents/vant/collapse/index",
+		      "van-collapse-item": "/wxcomponents/vant/collapse-item/index",
+		      "van-picker": "/wxcomponents/vant/picker/index"
+		    }
+
+	},
+	"uniIdRouter": {},
+	"tabBar": {
+		"color":"#666",
+		"selectedColor": "#31c27c",
+		"list": [
+			{
+				"text": "首页",
+				"pagePath": "pages/index/index",
+				"iconPath": "static/shouye-copy.png",
+				"selectedIconPath":"static/shouye-copy-3_副本.png"
+				
+			},
+			{
+				"text" : "发帖",
+				"pagePath": "pages/post-home/post-home",
+				"iconPath": "static/tianjia.png"
+			},
+			{
+				"text": "个人",
+				"pagePath": "pages/user-profile/user-profile",
+				"iconPath": "static/geren.png",
+				"selectedIconPath": "static/geren-2.png"
+			}
+		]
+		
+	}
+}

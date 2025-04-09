@@ -1,0 +1,7 @@
+{
+  "name": "post_discussion_inner",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "u-upload": "/uview-ui/components/u-upload/u-upload",
+    "u-button": "/uview-ui/components/u-button/u-button"
+  }
+}

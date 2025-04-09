@@ -1,0 +1,1 @@
+<view class="QAbox"><view class="userPic"><u-image vue-id="59da7cec-1" src="https://cdn.uviewui.com/uview/album/1.jpg" shape="circle" width="50rpx" height="50rpx" bind:__l="__l"></u-image></view><view class="userInfo"><text class="name">小凡古</text><text class="word">我想知道问题是什么</text></view></view>
