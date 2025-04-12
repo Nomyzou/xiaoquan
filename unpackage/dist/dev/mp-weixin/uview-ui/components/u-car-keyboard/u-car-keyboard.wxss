@@ -34,7 +34,9 @@ view.data-v-be80e900, scroll-view.data-v-be80e900, swiper-item.data-v-be80e900 {
   align-content: flex-start;
 }
 .u-keyboard.data-v-be80e900 {
+
   display: flex;
+
   flex-direction: column;
   justify-content: space-around;
   background-color: #e0e4e6;
@@ -42,7 +44,9 @@ view.data-v-be80e900, scroll-view.data-v-be80e900, swiper-item.data-v-be80e900 {
   padding: 6px 0 6px;
 }
 .u-keyboard__button.data-v-be80e900 {
+
   display: flex;
+
   flex-direction: row;
   justify-content: center;
   flex: 1;
@@ -53,7 +57,9 @@ view.data-v-be80e900, scroll-view.data-v-be80e900, swiper-item.data-v-be80e900 {
   border-radius: 4px;
 }
 .u-keyboard__button__inner-wrapper__inner.data-v-be80e900 {
+
   display: flex;
+
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -71,7 +77,9 @@ view.data-v-be80e900, scroll-view.data-v-be80e900, swiper-item.data-v-be80e900 {
   width: 134rpx;
   height: 80rpx;
   background-color: #BBBCC6;
+
   display: flex;
+
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -92,4 +100,3 @@ view.data-v-be80e900, scroll-view.data-v-be80e900, swiper-item.data-v-be80e900 {
 .u-hover-class.data-v-be80e900 {
   background-color: #BBBCC6;
 }
-

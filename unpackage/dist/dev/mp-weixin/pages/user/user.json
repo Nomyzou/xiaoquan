@@ -1,7 +1,0 @@
-{
-  "navigationStyle": "custom",
-  "enablePullDownRefresh": false,
-  "usingComponents": {
-    "newsbox": "/components/newsbox/newsbox"
-  }
-}

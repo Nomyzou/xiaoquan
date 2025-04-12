@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "newsbox": "/components/Newsbox/Newsbox"
+  }
+}

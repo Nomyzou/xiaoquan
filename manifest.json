@@ -18,7 +18,7 @@
         },
         /* 模块配置 */
         "modules" : {
-            "Maps" : {}
+            "OAuth" : {}
         },
         /* 应用发布信息 */
         "distribute" : {
@@ -43,13 +43,27 @@
                 ]
             },
             /* ios打包配置 */
-            "ios" : {},
+            "ios" : {
+                "capabilities" : {
+                    "entitlements" : {
+                        "com.apple.developer.associated-domains" : [
+                            "applinks:static-mp-f64dc8e9-0824-4c0c-bbb7-13f1287eb6e2.next.bspapp.com"
+                        ]
+                    }
+                }
+            },
             /* SDK配置 */
             "sdkConfigs" : {
                 "maps" : {
                     "baidu" : {
                         "appkey_ios" : "",
                         "appkey_android" : ""
+                    }
+                },
+                "oauth" : {
+                    "weixin" : {
+                        "appid" : "wx966ff91627d84fff",
+                        "UniversalLinks" : "https://static-mp-f64dc8e9-0824-4c0c-bbb7-13f1287eb6e2.next.bspapp.com/uni-universallinks/__UNI__82FE120/"
                     }
                 }
             }
@@ -59,12 +73,18 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "",
+        "appid" : "wx966ff91627d84fff",
         "setting" : {
             "urlCheck" : false,
-            "es6" : true
+            "es6" : true,
+            "minified" : true
         },
-        "usingComponents" : true
+        "usingComponents" : true,
+        "permission" : {
+            "scope.userLocation" : {
+                "desc" : "需要识别人员以确定身份"
+            }
+        }
     },
     "mp-alipay" : {
         "usingComponents" : true
@@ -87,5 +107,6 @@
                 }
             }
         }
-    }
+    },
+    "_spaceID" : "mp-f64dc8e9-0824-4c0c-bbb7-13f1287eb6e2"
 }

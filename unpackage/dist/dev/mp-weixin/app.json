@@ -1,24 +1,89 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/add/add",
-    "pages/demo01/demo01",
-    "pages/user/user",
-    "pages/detail/detail",
-    "pages/demo_3/demo_3",
-    "pages/demo02/demo02",
-    "pages/coper/coper",
-    "pages/apply/apply",
-    "pages/employer/employer",
-    "pages/company_name/company_name",
-    "pages/job_name/job_name",
-    "pages/jobDetail/jobDetail",
-    "pages/Ddetail/Ddetail",
-    "pages/tbDetail/tbDetail",
-    "pages/esDetail/esDetail",
-    "pages/employDetail/employDetail"
+    "pages/user-profile/user-profile",
+    "pages/post-home/post-home"
   ],
-  "subPackages": [],
+  "subPackages": [
+    {
+      "root": "pages/write-answer",
+      "pages": [
+        "write-answer"
+      ]
+    },
+    {
+      "root": "pages/employer-input",
+      "pages": [
+        "employer-input"
+      ]
+    },
+    {
+      "root": "pages/job-search-input",
+      "pages": [
+        "job-search-input"
+      ]
+    },
+    {
+      "root": "pages/dicuss-post-outer",
+      "pages": [
+        "dicuss-post-outer"
+      ]
+    },
+    {
+      "root": "pages/job_search",
+      "pages": [
+        "job_search"
+      ]
+    },
+    {
+      "root": "pages/auction-post",
+      "pages": [
+        "auction-post"
+      ]
+    },
+    {
+      "root": "pages/companion-post",
+      "pages": [
+        "companion-post"
+      ]
+    },
+    {
+      "root": "pages/discussion-post",
+      "pages": [
+        "discussion-post"
+      ]
+    },
+    {
+      "root": "pages/coper-post",
+      "pages": [
+        "coper-post"
+      ]
+    },
+    {
+      "root": "pages/freelance-post",
+      "pages": [
+        "freelance-post"
+      ]
+    },
+    {
+      "root": "pages/auction-detail",
+      "pages": [
+        "auction-detail"
+      ]
+    },
+    {
+      "root": "pages/discussion-detail",
+      "pages": [
+        "discussion-detail"
+      ]
+    },
+    {
+      "root": "pages/companion-detail",
+      "pages": [
+        "companion-detail"
+      ]
+    }
+  ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",
@@ -37,20 +102,23 @@
       },
       {
         "text": "发帖",
-        "pagePath": "pages/add/add",
+        "pagePath": "pages/post-home/post-home",
         "iconPath": "static/tianjia.png"
       },
       {
         "text": "个人",
-        "pagePath": "pages/user/user",
+        "pagePath": "pages/user-profile/user-profile",
         "iconPath": "static/geren.png",
         "selectedIconPath": "static/geren-2.png"
       }
     ]
   },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "需要识别人员以确定身份"
+    }
+  },
   "usingComponents": {
-    "van-action-sheet": "/wxcomponents/vant/action-sheet/index",
-    "van-area": "/wxcomponents/vant/area/index",
     "van-button": "/wxcomponents/vant/button/index",
     "van-card": "/wxcomponents/vant/card/index",
     "van-cell": "/wxcomponents/vant/cell/index",
@@ -69,14 +137,6 @@
     "van-notice-bar": "/wxcomponents/vant/notice-bar/index",
     "van-notify": "/wxcomponents/vant/notify/index",
     "van-panel": "/wxcomponents/vant/panel/index",
-    "van-popup": "/wxcomponents/vant/popup/index",
-    "van-progress": "/wxcomponents/vant/progress/index",
-    "van-radio": "/wxcomponents/vant/radio/index",
-    "van-radio-group": "/wxcomponents/vant/radio-group/index",
-    "van-row": "/wxcomponents/vant/row/index",
-    "van-search": "/wxcomponents/vant/search/index",
-    "van-slider": "/wxcomponents/vant/slider/index",
-    "van-stepper": "/wxcomponents/vant/stepper/index",
     "van-steps": "/wxcomponents/vant/steps/index",
     "van-submit-bar": "/wxcomponents/vant/submit-bar/index",
     "van-swipe-cell": "/wxcomponents/vant/swipe-cell/index",
@@ -93,7 +153,6 @@
     "van-rate": "/wxcomponents/vant/rate/index",
     "van-collapse": "/wxcomponents/vant/collapse/index",
     "van-collapse-item": "/wxcomponents/vant/collapse-item/index",
-    "van-picker": "/wxcomponents/vant/picker/index",
-    "van-uploader": "/wxcomponents/vant/uploader/index"
+    "van-picker": "/wxcomponents/vant/picker/index"
   }
 }

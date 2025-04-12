@@ -34,12 +34,16 @@ view.data-v-0d33af60, scroll-view.data-v-0d33af60, swiper-item.data-v-0d33af60 {
   align-content: flex-start;
 }
 .u-upload.data-v-0d33af60 {
+
   display: flex;
+
   flex-direction: column;
   flex: 1;
 }
 .u-upload__wrap.data-v-0d33af60 {
+
   display: flex;
+
   flex-direction: row;
   flex-wrap: wrap;
   flex: 1;
@@ -49,7 +53,9 @@ view.data-v-0d33af60, scroll-view.data-v-0d33af60, swiper-item.data-v-0d33af60 {
   margin: 0 8px 8px 0;
   position: relative;
   overflow: hidden;
+
   display: flex;
+
   flex-direction: row;
 }
 .u-upload__wrap__preview__image.data-v-0d33af60 {
@@ -61,7 +67,9 @@ view.data-v-0d33af60, scroll-view.data-v-0d33af60, swiper-item.data-v-0d33af60 {
   height: 80px;
   background-color: #f2f2f2;
   flex: 1;
+
   display: flex;
+
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -78,7 +86,9 @@ view.data-v-0d33af60, scroll-view.data-v-0d33af60, swiper-item.data-v-0d33af60 {
   background-color: #373737;
   height: 14px;
   width: 14px;
+
   display: flex;
+
   flex-direction: row;
   border-bottom-left-radius: 100px;
   align-items: center;
@@ -96,7 +106,9 @@ view.data-v-0d33af60, scroll-view.data-v-0d33af60, swiper-item.data-v-0d33af60 {
   position: absolute;
   bottom: 0;
   right: 0;
+
   display: flex;
+
   flex-direction: row;
   border-style: solid;
   border-top-color: transparent;
@@ -121,7 +133,9 @@ view.data-v-0d33af60, scroll-view.data-v-0d33af60, swiper-item.data-v-0d33af60 {
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
+
   display: flex;
+
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -136,7 +150,9 @@ view.data-v-0d33af60, scroll-view.data-v-0d33af60, swiper-item.data-v-0d33af60 {
   margin-top: 5px;
 }
 .u-upload__button.data-v-0d33af60 {
+
   display: flex;
+
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -158,4 +174,3 @@ view.data-v-0d33af60, scroll-view.data-v-0d33af60, swiper-item.data-v-0d33af60 {
 .u-upload__button--disabled.data-v-0d33af60 {
   opacity: 0.5;
 }
-

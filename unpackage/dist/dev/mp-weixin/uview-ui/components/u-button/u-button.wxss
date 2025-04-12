@@ -56,7 +56,7 @@ view.data-v-6e15e680, scroll-view.data-v-6e15e680, swiper-item.data-v-6e15e680 {
   border-color: #000;
 }
 .u-button--active.data-v-6e15e680:before {
-  opacity: .15;
+  opacity: 0.15;
 }
 .u-button__icon + .u-button__text.data-v-6e15e680:not(:empty), .u-button__loading-text.data-v-6e15e680 {
   margin-left: 4px;
@@ -81,7 +81,9 @@ view.data-v-6e15e680, scroll-view.data-v-6e15e680, swiper-item.data-v-6e15e680 {
   position: relative;
   align-items: center;
   justify-content: center;
+
   display: flex;
+
   flex-direction: row;
   box-sizing: border-box;
   flex-direction: row;
@@ -153,7 +155,9 @@ view.data-v-6e15e680, scroll-view.data-v-6e15e680, swiper-item.data-v-6e15e680 {
   border-style: solid;
 }
 .u-button--block.data-v-6e15e680 {
+
   display: flex;
+
   flex-direction: row;
   width: 100%;
 }
@@ -180,4 +184,3 @@ view.data-v-6e15e680, scroll-view.data-v-6e15e680, swiper-item.data-v-6e15e680 {
 .u-button--hairline.data-v-6e15e680 {
   border-width: 0.5px !important;
 }
-

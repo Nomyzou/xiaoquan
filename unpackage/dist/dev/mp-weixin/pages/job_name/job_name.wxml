@@ -1,1 +1,0 @@
-<view class="job_name"><view class="title">请发布一个岗位职位</view><view class="new_job"><u-button class="custom" bind:click="__e" vue-id="723568a0-1" data-event-opts="{{[['^click',[['to_job']]]]}}" bind:__l="__l" vue-slots="{{['default']}}">发布新职位</u-button></view></view>

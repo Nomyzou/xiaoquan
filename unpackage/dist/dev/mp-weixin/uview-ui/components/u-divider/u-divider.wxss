@@ -34,7 +34,9 @@ view.data-v-23bd18c4, scroll-view.data-v-23bd18c4, swiper-item.data-v-23bd18c4 {
   align-content: flex-start;
 }
 .u-divider.data-v-23bd18c4 {
+
   display: flex;
+
   flex-direction: row;
   flex-direction: row;
   align-items: center;
@@ -48,4 +50,3 @@ view.data-v-23bd18c4, scroll-view.data-v-23bd18c4, swiper-item.data-v-23bd18c4 {
   margin: 0 12px;
   color: #c0c4cc;
 }
-

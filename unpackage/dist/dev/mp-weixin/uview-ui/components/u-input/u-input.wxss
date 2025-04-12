@@ -34,7 +34,9 @@ view.data-v-460c1d26, scroll-view.data-v-460c1d26, swiper-item.data-v-460c1d26 {
   align-content: flex-start;
 }
 .u-input.data-v-460c1d26 {
+
   display: flex;
+
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -51,14 +53,18 @@ view.data-v-460c1d26, scroll-view.data-v-460c1d26, swiper-item.data-v-460c1d26 {
 }
 .u-input__content.data-v-460c1d26 {
   flex: 1;
+
   display: flex;
+
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }
 .u-input__content__field-wrapper.data-v-460c1d26 {
   position: relative;
+
   display: flex;
+
   flex-direction: row;
   margin: 0;
   flex: 1;
@@ -76,7 +82,9 @@ view.data-v-460c1d26, scroll-view.data-v-460c1d26, swiper-item.data-v-460c1d26 {
   height: 20px;
   border-radius: 100px;
   background-color: #c6c7cb;
+
   display: flex;
+
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -90,4 +98,3 @@ view.data-v-460c1d26, scroll-view.data-v-460c1d26, swiper-item.data-v-460c1d26 {
 .u-input__content__prefix-icon.data-v-460c1d26 {
   margin-right: 4px;
 }
-

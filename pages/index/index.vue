@@ -6,7 +6,20 @@
 	<!-- 	<view class="box2" hover-class="boxHover">
 			<view class="inner" hover-class="innerHover" hover-stop-propagation></view>
 		</view> -->
-		
+			<u-popup :show="showPop" :round="10" mode="bottom"  @close="closePop" @open="openPop">
+				<view class="popup-content">
+					<view class="header">
+						<image class="logo" src="/static/logo.png"></image>
+						<text class="title">小圈 申请</text>
+					</view>
+					<view class="subtitle">获取你的登录信息</view>
+					<view class="button-container">
+						<u-button class="button" round>拒绝</u-button>
+						<view class="spacer"></view>
+						<u-button class="button" color="#4BC164" round @click="handleLogin">手机号一键登录</u-button>
+					</view>
+				</view>
+			</u-popup>
 		
 		<van-tabs v-model:active="activeName" type='line' line-height='3px' line-width='30px'color='blue' animated> 
 		  <van-tab title="校内" name="a">
@@ -71,6 +84,7 @@
 	export default {
 		data() {
 			return {
+				showPop:true,
 				selectedIndex: -1, // 初始没有选中项
 				selectedIndex1:-1,
 
@@ -92,6 +106,83 @@
 			
 		},
 		methods: {
+			openPop(){
+				console.log('打开')
+			},
+			closePop(){
+				this.showPop=false
+			},
+			handleLogin() {
+				// 先获取用户信息
+				uni.getUserProfile({
+					desc: '获取用户信息用于登录', // 授权说明
+					success: (userRes) => {
+						const userInfo = userRes.userInfo;
+						console.log('用户信息：', userInfo);
+						// 将用户信息存储在本地缓存中
+						uni.setStorageSync('userInfo', userInfo);
+
+						// 在获取用户信息成功后，调用 uni.login 获取登录凭证
+						uni.login({
+							success: (loginRes) => {
+								if (loginRes.code) {
+									console.log('登录凭证：', loginRes.code);
+									// 调用云函数进行登录或注册
+									this.registerUser(loginRes.code, userInfo);
+								} else {
+									console.error('登录失败：', loginRes.errMsg);
+									uni.showToast({
+										title: '登录失败',
+										icon: 'none'
+									});
+								}
+							},
+							fail: (err) => {
+								console.error('登录失败：', err);
+								uni.showToast({
+									title: '登录失败',
+									icon: 'none'
+								});
+							}
+						});
+					},
+					fail: (err) => {
+						console.error('获取用户信息失败：', err);
+						uni.showToast({
+							title: '获取用户信息失败',
+							icon: 'none'
+						});
+					}
+				});
+			},
+			registerUser(code, userInfo) {
+				// 调用云函数进行登录或注册
+				uniCloud.callFunction({
+					name: 'registerUser',
+					data: {
+						code: code, // 微信登录凭证
+						userInfo: userInfo // 用户信息
+					},
+					success: (res) => {
+						console.log('注册/登录成功：', res);
+						this.$globalData.openid=res.result.token
+                        console.log('openid',this.$globalData.openid)
+						uni.showToast({
+							title: '登录成功',
+							icon: 'success'
+						});
+						// 登录成功后关闭弹出窗
+						this.closePop();
+					},
+					fail: (err) => {
+						console.error('注册/登录失败：', err);
+						uni.showToast({
+							title: '登录失败',
+							icon: 'none'
+						});
+					}
+				});
+			},
 			  selectItem(index) {
 			      this.selectedIndex = index
 				  const that=this
@@ -216,6 +307,63 @@
 		padding:15rpx 0;
 		
 	}
+}
+
+.popup-content {
+	height: 300rpx;
+	padding: 20rpx;
+	padding-top: 40rpx;
+	padding-left: 30rpx;
+	position: relative; /* 为按钮容器提供定位上下文 */
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20rpx;
+}
+
+.logo {
+	width: 40rpx;
+	height: 40rpx;
+	margin-right: 10rpx;
+}
+
+.title {
+	font-family: '黑体';
+	font-size: 32rpx;
+	font-weight: bold;
+	text-align: left;
+}
+
+.subtitle {
+	font-family: '黑体';
+	font-size: 28rpx;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-align: left;
+	margin-bottom: 20rpx;
+}
+
+.button-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 90%;
+	padding: 0 20rpx;
+	position: absolute; /* 绝对定位 */
+	bottom: 50rpx; /* 距离底部 20rpx */
+	left: 0; /* 左对齐 */
+}
+
+.button {
+	width: 150rpx;
+	border-radius: 25rpx;
+	flex: none;
+}
+
+.spacer {
+	width: 50rpx;
 }
 
 </style>

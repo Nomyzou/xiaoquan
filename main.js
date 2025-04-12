@@ -13,6 +13,12 @@ App.mpType = 'app'
 const app = new Vue({
   ...App
 })
+
+Vue.prototype.$globalData = {
+  userInfo: null,
+  openid: '',
+  // 你想存的任何变量
+}
 app.$mount()
 // #endif
 

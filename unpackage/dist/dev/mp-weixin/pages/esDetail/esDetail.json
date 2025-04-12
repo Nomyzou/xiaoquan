@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "",
-  "usingComponents": {
-    "u-image": "/uview-ui/components/u-image/u-image",
-    "u-album": "/uview-ui/components/u-album/u-album",
-    "q-abox": "/components/QAbox/QAbox"
-  }
-}

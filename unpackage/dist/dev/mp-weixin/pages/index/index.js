@@ -101,8 +101,14 @@ __webpack_require__.r(__webpack_exports__);
 var components
 try {
   components = {
-    newsbox: function () {
-      return __webpack_require__.e(/*! import() | components/newsbox/newsbox */ "components/newsbox/newsbox").then(__webpack_require__.bind(null, /*! @/components/newsbox/newsbox.vue */ 302))
+    uPopup: function () {
+      return Promise.all(/*! import() | uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-popup/u-popup.vue */ 288))
+    },
+    uButton: function () {
+      return Promise.all(/*! import() | uview-ui/components/u-button/u-button */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-button/u-button")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 296))
+    },
+    Newsbox: function () {
+      return __webpack_require__.e(/*! import() | components/Newsbox/Newsbox */ "components/Newsbox/Newsbox").then(__webpack_require__.bind(null, /*! @/components/Newsbox/Newsbox.vue */ 306))
     },
   }
 } catch (e) {
@@ -159,7 +165,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uniCloud, uni) {
+/* WEBPACK VAR INJECTION */(function(uni, uniCloud) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -224,39 +230,200 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     return {
+      showPop: true,
+      selectedIndex: -1,
+      // 初始没有选中项
+      selectedIndex1: -1,
+      tabName: ['找搭子', '闲置', '讨论', '兼职', '科研', '社团'],
+      tabName1: ['项目支持', '推广成果', '科研合作', '广告', '讨论', '兼职'],
       activeName: '',
-      listArr: [],
+      listArr: ['1', '2', '3'],
+      listArr_inner: [],
+      listArr_outer: [],
       title: 'Hello',
       type: ['samepeople', 'unused', 'topic'],
       head: ['寻找一起冲浪的小伙伴', '用了四年的充电宝', '有没有推荐的强化学习视频']
     };
   },
   onLoad: function onLoad() {
+    // this.getUserInfo()
     this.getData();
     console.log('dataget', this.listArr);
   },
   methods: {
+    openPop: function openPop() {
+      console.log('打开');
+    },
+    closePop: function closePop() {
+      this.showPop = false;
+    },
+    handleLogin: function handleLogin() {
+      var _this = this;
+      // 先获取用户信息
+      uni.getUserProfile({
+        desc: '获取用户信息用于登录',
+        // 授权说明
+        success: function success(userRes) {
+          var userInfo = userRes.userInfo;
+          console.log('用户信息：', userInfo);
+          // 将用户信息存储在本地缓存中
+          uni.setStorageSync('userInfo', userInfo);
+
+          // 在获取用户信息成功后，调用 uni.login 获取登录凭证
+          uni.login({
+            success: function success(loginRes) {
+              if (loginRes.code) {
+                console.log('登录凭证：', loginRes.code);
+                // 调用云函数进行登录或注册
+                _this.registerUser(loginRes.code, userInfo);
+              } else {
+                console.error('登录失败：', loginRes.errMsg);
+                uni.showToast({
+                  title: '登录失败',
+                  icon: 'none'
+                });
+              }
+            },
+            fail: function fail(err) {
+              console.error('登录失败：', err);
+              uni.showToast({
+                title: '登录失败',
+                icon: 'none'
+              });
+            }
+          });
+        },
+        fail: function fail(err) {
+          console.error('获取用户信息失败：', err);
+          uni.showToast({
+            title: '获取用户信息失败',
+            icon: 'none'
+          });
+        }
+      });
+    },
+    registerUser: function registerUser(code, userInfo) {
+      var _this2 = this;
+      // 调用云函数进行登录或注册
+      uniCloud.callFunction({
+        name: 'registerUser',
+        data: {
+          code: code,
+          // 微信登录凭证
+          userInfo: userInfo // 用户信息
+        },
+
+        success: function success(res) {
+          console.log('注册/登录成功：', res);
+          _this2.$globalData.openid = res.result.token;
+          console.log('openid', _this2.$globalData.openid);
+          uni.showToast({
+            title: '登录成功',
+            icon: 'success'
+          });
+          // 登录成功后关闭弹出窗
+          _this2.closePop();
+        },
+        fail: function fail(err) {
+          console.error('注册/登录失败：', err);
+          uni.showToast({
+            title: '登录失败',
+            icon: 'none'
+          });
+        }
+      });
+    },
+    selectItem: function selectItem(index) {
+      this.selectedIndex = index;
+      var that = this;
+      this.listArr_outer = this.listArr.filter(function (item) {
+        return item.situation !== undefined && item.situation !== null && item.situation === 'outer';
+      });
+      this.selectedIndex = index;
+      console.log(index);
+      console.log(that.tabName[index]);
+      this.listArr_outer = this.listArr_outer.filter(function (item) {
+        return item.type === index;
+      });
+      console.log(this.listArr_inner);
+    },
+    selectItem_inner: function selectItem_inner(index) {
+      var that = this;
+      this.listArr_inner = this.listArr.filter(function (item) {
+        return item.situation !== undefined && item.situation !== null && item.situation === 'inner';
+      });
+      this.selectedIndex1 = index;
+      console.log(index);
+      console.log(that.tabName[index]);
+      this.listArr_inner = this.listArr_inner.filter(function (item) {
+        return item.type === that.tabName[index];
+      });
+      console.log(this.listArr_inner);
+    },
+    // getUserInfo() {
+    //       // 获取用户信息
+    //       uni.getUserProfile({
+    //         desc: '获取用户信息用于完善个人资料',  // 授权说明
+    //         success: (res) => {
+    //           console.log('用户信息：', res.userInfo);
+    //           // 将用户信息存储在本地缓存中
+    //           uni.setStorageSync('userInfo', res.userInfo);
+    //         },
+    //         fail: (err) => {
+    //           console.error('获取用户信息失败：', err);
+    //         }
+    //       });},
     //获取数据库的列表
     getData: function getData() {
-      var _this = this;
+      var _this3 = this;
       uniCloud.callFunction({
         name: "art_get_all"
       }).then(function (res) {
-        console.log(res);
-        _this.listArr = res.result.data;
+        console.log('获取数据库数据', res);
+        _this3.listArr = res.result.data;
+        _this3.listArr_inner = _this3.listArr.filter(function (item) {
+          return item.situation !== undefined && item.situation !== null && item.situation === 'inner';
+        });
+        _this3.listArr_outer = _this3.listArr.filter(function (item) {
+          return item.situation !== undefined && item.situation !== null && item.situation === 'outer';
+        });
+        console.log(_this3.listArr_outer); // 输出所有满足条件的对象
       });
     },
     gotoDetail: function gotoDetail(item) {
       var targetPage = '';
       if (item.hType === 'dz') {
-        targetPage = '/pages/employDetail/employDetail';
+        targetPage = '/pages/companion-detail/companion-detail';
       } else if (item.hType === 'xz') {
-        targetPage = '/pages/esDetail/esDetail';
+        targetPage = '/pages/auction-detail/auction-detail';
       } else if (item.hType === 'tz') {
-        targetPage = '/pages/tbDetail/tbDetail';
+        targetPage = '/pages/discussion-detail/discussion-detail';
       } else {
         targetPage = '/pages/detail/detail';
       }
@@ -275,7 +442,7 @@ var _default = {
   }
 };
 exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 27)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 27)["uniCloud"]))
 
 /***/ }),
 

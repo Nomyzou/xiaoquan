@@ -5,9 +5,9 @@
 			<view class='detail'>
 				<text>如何看待异形：夺命舰票房过十亿</text>
 				<view class='button'>
-				<u-button size='small' type='primary' plain>写回答</u-button>
+					<u-button size='small' type='primary' plain @click="gotoWriteAnswer">写回答</u-button>
 				</view>
-				</view>
+			</view>
 		</view>
 		<view class='answer_title'>
 			<text>回答 33</text></view>
@@ -23,6 +23,13 @@
 			return {
 				
 			};
+		},
+		methods: {
+			gotoWriteAnswer() {
+				uni.navigateTo({
+					url: '/pages/write-answer/write-answer'
+				});
+			}
 		}
 	}
 </script>

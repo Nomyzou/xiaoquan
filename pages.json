@@ -25,7 +25,19 @@
 	]
 		
 	,
-	"subPackages": [
+	"subPackages": [{
+		"root":"pages/write-answer",
+		"pages": [
+			{
+				"path":"write-answer",
+				"style": {
+					"navigationBarTitleText": "回答帖子"
+				}
+			}
+			
+		]
+	}
+		,
 		{
 			"root": "pages/employer-input",
 			"pages": [
@@ -161,7 +173,7 @@
 			}
 		],
 	"easycom": {
-			"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+			"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
 		},
 
 	"globalStyle": {

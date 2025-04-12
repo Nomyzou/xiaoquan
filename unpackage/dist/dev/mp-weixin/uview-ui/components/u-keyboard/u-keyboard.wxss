@@ -34,7 +34,9 @@ view.data-v-5aa479a0, scroll-view.data-v-5aa479a0, swiper-item.data-v-5aa479a0 {
   align-content: flex-start;
 }
 .u-keyboard__tooltip.data-v-5aa479a0 {
+
   display: flex;
+
   flex-direction: row;
   justify-content: space-between;
   background-color: #FFFFFF;
@@ -57,4 +59,3 @@ view.data-v-5aa479a0, scroll-view.data-v-5aa479a0, swiper-item.data-v-5aa479a0 {
 .u-keyboard__tooltip__tips.data-v-5aa479a0 {
   color: #909193;
 }
-
