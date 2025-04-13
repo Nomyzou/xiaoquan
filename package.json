@@ -11,6 +11,7 @@
   "dependencies": {
     "@dcloudio/uni-cloud": "^3.0.0-4050720250324001",
     "@vant/weapp": "^1.11.6",
+    "axios": "^1.8.4",
     "uview-ui": "^2.0.37"
   },
   "description": ""

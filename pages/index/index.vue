@@ -84,7 +84,7 @@
 	export default {
 		data() {
 			return {
-				showPop:true,
+				showPop: false,
 				selectedIndex: -1, // 初始没有选中项
 				selectedIndex1:-1,
 
@@ -100,10 +100,28 @@
 			}
 		},
 		onLoad() {
-			// this.getUserInfo()
-			this.getData()
-			console.log('dataget',this.listArr)
 			
+			   this.getData()
+            	console.log('dataget',this.listArr)
+
+			// 检测 session_key 是否有效
+			wx.checkSession({
+				success: () => {
+					console.log('session_key 未过期');
+					// 直接使用本地缓存的 token 发起请求
+					const token = wx.getStorageSync('token');
+					if (token) {
+						this.getUserInfo(token);
+					} else {
+						console.log('未找到本地 token，需要重新登录');
+						this.showPop = true;
+					}
+				},
+				fail: () => {
+					console.log('session_key 已过期，需要重新登录');
+					this.showPop = true;
+				}
+			});
 		},
 		methods: {
 			openPop(){
@@ -113,69 +131,72 @@
 				this.showPop=false
 			},
 			handleLogin() {
-				// 先获取用户信息
-				uni.getUserProfile({
-					desc: '获取用户信息用于登录', // 授权说明
-					success: (userRes) => {
-						const userInfo = userRes.userInfo;
-						console.log('用户信息：', userInfo);
-						// 将用户信息存储在本地缓存中
-						uni.setStorageSync('userInfo', userInfo);
+				// 调用 wx.login 获取临时登录凭证
+				wx.login({
+					success: (loginRes) => {
+						if (loginRes.code) {
+							console.log('登录凭证：', loginRes.code);
+							// 调用云函数进行登录
+							uniCloud.callFunction({
+								name: 'registerUser',
+								data: {
+									code: loginRes.code
+								},
+								success: (res) => {
+									if (res.result.code === 0) {
+										// 将自定义登录态存储在本地缓存中
+										wx.setStorageSync('token', res.result.token);
+										console.log('登录成功，token:', res.result.token);
+										uni.showToast({
+											title: '登录成功',
+											icon: 'success'
+										});
+										// 登录成功后关闭弹出窗
+										uniCloud.callFunction({
+											name: 'getUserInfo',
+											data: {
+												token: wx.getStorageSync('token') // 携带自定义登录态
+											},
+											success: (res) => {
+												if (res.result.code === 0) {
+												console.log('业务数据：', res.result.data);
+												} else {
+												console.error('获取业务数据失败：', res.result.message);
+												}
+											},
+											fail: (err) => {
+												console.error('获取用户信息失败：', err);
+											}
+										});
 
-						// 在获取用户信息成功后，调用 uni.login 获取登录凭证
-						uni.login({
-							success: (loginRes) => {
-								if (loginRes.code) {
-									console.log('登录凭证：', loginRes.code);
-									// 调用云函数进行登录或注册
-									this.registerUser(loginRes.code, userInfo);
-								} else {
-									console.error('登录失败：', loginRes.errMsg);
+										// 登录成功后关闭弹出窗
+										this.closePop();
+									} else {
+										console.error('登录失败：', res.result.message);
+										uni.showToast({
+											title: '登录失败',
+											icon: 'none'
+										});
+									}
+								},
+								fail: (err) => {
+									console.error('请求失败：', err);
 									uni.showToast({
-										title: '登录失败',
+										title: '请求失败',
 										icon: 'none'
 									});
 								}
-							},
-							fail: (err) => {
-								console.error('登录失败：', err);
-								uni.showToast({
-									title: '登录失败',
-									icon: 'none'
-								});
-							}
-						});
+							});
+						} else {
+							console.error('登录失败：', loginRes.errMsg);
+							uni.showToast({
+								title: '登录失败',
+								icon: 'none'
+							});
+						}
 					},
 					fail: (err) => {
-						console.error('获取用户信息失败：', err);
-						uni.showToast({
-							title: '获取用户信息失败',
-							icon: 'none'
-						});
-					}
-				});
-			},
-			registerUser(code, userInfo) {
-				// 调用云函数进行登录或注册
-				uniCloud.callFunction({
-					name: 'registerUser',
-					data: {
-						code: code, // 微信登录凭证
-						userInfo: userInfo // 用户信息
-					},
-					success: (res) => {
-						console.log('注册/登录成功：', res);
-						this.$globalData.openid=res.result.token
-                        console.log('openid',this.$globalData.openid)
-						uni.showToast({
-							title: '登录成功',
-							icon: 'success'
-						});
-						// 登录成功后关闭弹出窗
-						this.closePop();
-					},
-					fail: (err) => {
-						console.error('注册/登录失败：', err);
+						console.error('登录失败：', err);
 						uni.showToast({
 							title: '登录失败',
 							icon: 'none'
@@ -183,7 +204,7 @@
 					}
 				});
 			},
-			  selectItem(index) {
+			selectItem(index) {
 			      this.selectedIndex = index
 				  const that=this
 				  this.listArr_outer = this.listArr.filter(item => {
@@ -213,19 +234,25 @@
 					console.log(this.listArr_inner)
 					
 				  },
-			// getUserInfo() {
-			//       // 获取用户信息
-			//       uni.getUserProfile({
-			//         desc: '获取用户信息用于完善个人资料',  // 授权说明
-			//         success: (res) => {
-			//           console.log('用户信息：', res.userInfo);
-			//           // 将用户信息存储在本地缓存中
-			//           uni.setStorageSync('userInfo', res.userInfo);
-			//         },
-			//         fail: (err) => {
-			//           console.error('获取用户信息失败：', err);
-			//         }
-			//       });},
+			getUserInfo(token) {
+				// 调用云函数获取用户信息
+				uniCloud.callFunction({
+					name: 'getUserInfo',
+					data: {
+						token: token
+					},
+					success: (res) => {
+						if (res.result.code === 0) {
+							console.log('业务数据：', res.result.data);
+						} else {
+							console.error('获取业务数据失败：', res.result.message);
+						}
+					},
+					fail: (err) => {
+						console.error('请求失败：', err);
+					}
+				});
+			},
 			//获取数据库的列表
 			getData(){
 				uniCloud.callFunction({
