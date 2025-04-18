@@ -160,8 +160,17 @@ exports.default = void 0;
 //
 var _default = {
   name: "QAbox",
+  props: {
+    content: {
+      type: String,
+      default: '我想知道问题是什么'
+    }
+  },
   data: function data() {
     return {};
+  },
+  onLoad: function onLoad() {
+    console.log('content', this.content);
   }
 };
 exports.default = _default;

@@ -168,7 +168,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni, uniCloud) {
+/* WEBPACK VAR INJECTION */(function(uni) {
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
 Object.defineProperty(exports, "__esModule", {
@@ -179,47 +179,9 @@ var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
 var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ 18));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 31));
+var _uniCloud = __webpack_require__(/*! @dcloudio/uni-cloud */ 444);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var _default = {
   data: function data() {
     return {
@@ -227,11 +189,22 @@ var _default = {
         situation: 'inner',
         head: '',
         detail: '',
-        type: '讨论'
+        type: '讨论',
+        answer: []
       },
       fileList1: [],
-      picUrls: []
+      picUrls: [],
+      token: '' // 全局变量存储 token
     };
+  },
+  onLoad: function onLoad() {
+    // 从本地缓存中获取 token
+    this.token = uni.getStorageSync('token');
+    if (!this.token) {
+      console.error('未找到 token');
+    } else {
+      console.log('token', this.token);
+    }
   },
   methods: {
     onSubmit: function onSubmit(e) {
@@ -268,7 +241,7 @@ var _default = {
                             _context.prev = 0;
                             cloudPath = "uploads/".concat(Date.now(), "-").concat(Math.random(), ".jpg"); //云端名字和本地地址传上去
                             _context.next = 4;
-                            return uniCloud.uploadFile({
+                            return _uniCloud.uniCloud.uploadFile({
                               cloudPath: cloudPath,
                               filePath: item.url
                             });
@@ -307,23 +280,27 @@ var _default = {
                 updateList = _context2.sent;
                 console.log('updatelist', updateList);
                 _this.fileList1 = updateList;
+
+                // 提交帖子
                 detail = that.dataValue;
-                uniCloud.callFunction({
-                  name: 'art_add_row',
+                _uniCloud.uniCloud.callFunction({
+                  name: 'addDiscussion',
                   data: {
                     detail: detail,
                     picurls: that.picUrls,
-                    hType: 'tz' //渲染到主页的盒子需要标识，然后进入不同的详细页面
+                    hType: 'tz',
+                    //渲染到主页的盒子需要标识，然后进入不同的详细页面
+                    token: that.token // 使用全局变量中的 token
                   }
                 }).then(function (res) {
-                  console.log('res', res);
+                  console.log('res_前端', res);
                   uni.showToast({
                     title: '提交成功',
                     icon: 'success'
                   });
                   setTimeout(function () {
                     uni.reLaunch({
-                      url: '/pages/add/add'
+                      url: '/pages/post-home/post-home'
                     });
                   }, 1000);
                 });
@@ -373,7 +350,7 @@ var _default = {
   }
 };
 exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 27)["uniCloud"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
 

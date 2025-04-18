@@ -1,0 +1,7 @@
+{
+  "name": "addDiscussion",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

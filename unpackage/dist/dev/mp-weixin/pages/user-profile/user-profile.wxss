@@ -65,6 +65,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
 }
 .user-box .user-info image {
   width: 10vh;
@@ -73,4 +74,11 @@
   /* 设置图片的高度 */
   border-radius: 50%;
   /* 将边框半径设为宽度的一半，形成圆形 */
+}
+.user-box .user-info .name {
+  margin-top: 10rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
 }

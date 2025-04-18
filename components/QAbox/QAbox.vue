@@ -6,20 +6,29 @@
 		
 		<view class='userInfo'>
 			<text class='name'>小凡古</text>
-			<text class='word'>我想知道问题是什么</text>
+			<text class='word'>{{ content }}</text>
 		</view>
 		
-		<view
+		<view class='time'>2025-04-16 10:00:00</view>
 	</view>
 </template>
 
 <script>
 	export default {
 		name:"QAbox",
+		props: {
+			content: {
+				type: String,
+				default: '我想知道问题是什么'
+			}
+		},
 		data() {
 			return {
 				
 			};
+		},
+		onLoad() {
+			console.log('content',this.content)
 		}
 	}
 </script>

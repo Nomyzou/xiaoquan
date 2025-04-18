@@ -1,0 +1,7 @@
+{
+  "name": "getDiscussionDetail",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

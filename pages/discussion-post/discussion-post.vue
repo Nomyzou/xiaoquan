@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import { uniCloud } from '@dcloudio/uni-cloud';
+
 	export default {
 		data() {
 			return {
@@ -45,17 +47,31 @@
 					situation:'inner',
 					head:'',
 					detail:'',
-					type:'讨论'
+					type:'讨论',
+					answer:[]
 					
 					
 				},
 				fileList1:[],
-				picUrls:[]
+				picUrls: [],
+				token: '' // 全局变量存储 token
 			};
+		},
+		onLoad() {
+			// 从本地缓存中获取 token
+			this.token = uni.getStorageSync('token');
+			if (!this.token) {
+				console.error('未找到 token');
+			}
+			else{
+				console.log('token',this.token)
+			}
+
+
 		},
 		methods:{
 			async onSubmit(e){
-				const that =this
+				const that = this
 				console.log(e)	
 				let updateList =[...this.fileList1]
 				 updateList.forEach(item => {
@@ -95,24 +111,25 @@
 				console.log('updatelist',updateList)
 				this.fileList1 =updateList
 				
+				// 提交帖子
 				let detail = that.dataValue
 				uniCloud.callFunction({
-					name:'art_add_row',
+					name:'addDiscussion',
 					data:{
 						detail,
 						picurls:that.picUrls,
 						hType:'tz', //渲染到主页的盒子需要标识，然后进入不同的详细页面
-						
+						token: that.token // 使用全局变量中的 token
 					}
 				   }).then(res=>{
-					console.log('res',res)
+					console.log('res_前端',res)
 					  uni.showToast({
 					          title: '提交成功',
 					          icon: 'success'
 					        });
 							
 					setTimeout(()=> { uni.reLaunch({
-						url:'/pages/add/add'
+						url:'/pages/post-home/post-home'
 					})},1000)}) 
 						
 			},

@@ -32,8 +32,13 @@
 			return {
 				answerContent: '',
 				fileList: [],
-				picUrls: []
+				picUrls: [],
+				discussionId: ''
 			};
+		},
+		onLoad(options) {
+			this.discussionId = options.discussionId;
+			console.log(this.discussionId,'id')
 		},
 		methods: {
 			async onSubmit() {
@@ -75,18 +80,27 @@
 				uniCloud.callFunction({
 					name: 'addAnswer',
 					data: {
+						discussionId: this.discussionId,
 						content: this.answerContent,
 						picUrls: this.picUrls
+					},
+					success: (res) => {
+						console.log('res', res);
+						uni.showToast({
+							title: '提交成功',
+							icon: 'success'
+						});
+						setTimeout(() => {
+							uni.navigateBack();
+						}, 1000);
+					},
+					fail: (err) => {
+						console.error('提交失败：', err);
+						uni.showToast({
+							title: '提交失败',
+							icon: 'none'
+						});
 					}
-				}).then(res => {
-					console.log('res', res);
-					uni.showToast({
-						title: '提交成功',
-						icon: 'success'
-					});
-					setTimeout(() => {
-						uni.navigateBack();
-					}, 1000);
 				});
 			},
 			afterRead(e) {

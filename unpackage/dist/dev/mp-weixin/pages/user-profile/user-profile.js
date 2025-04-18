@@ -159,15 +159,15 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
+/* WEBPACK VAR INJECTION */(function(uni, uniCloud) {
 
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-//
-//
-//
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 28));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 31));
 //
 //
 //
@@ -208,18 +208,131 @@ exports.default = void 0;
 //
 var _default = {
   data: function data() {
-    return {};
+    return {
+      userInfo: {
+        avatarUrl: 'https://cdn.uviewui.com/uview/album/1.jpg',
+        // 默认头像
+        nickName: '小凡古' // 默认名称
+      }
+    };
   },
+
   methods: {
     gotoDetail: function gotoDetail() {
       uni.navigateTo({
         url: "/pages/detail/detail"
       });
+    },
+    // 上传头像
+    uploadAvatar: function uploadAvatar() {
+      var _this = this;
+      uni.chooseImage({
+        count: 1,
+        sizeType: ['compressed'],
+        sourceType: ['album', 'camera'],
+        success: function success(res) {
+          var tempFilePath = res.tempFilePaths[0];
+          uniCloud.uploadFile({
+            cloudPath: "avatars/".concat(Date.now(), "-").concat(Math.random(), ".jpg"),
+            filePath: tempFilePath,
+            success: function success(uploadRes) {
+              _this.userInfo.avatarUrl = uploadRes.fileID;
+              uni.setStorageSync('userInfo', _this.userInfo); // 更新本地缓存
+              _this.updateUserInfo(); // 调用云函数更新数据库
+              uni.showToast({
+                title: '头像上传成功',
+                icon: 'success'
+              });
+            },
+            fail: function fail(err) {
+              console.error('头像上传失败：', err);
+              uni.showToast({
+                title: '头像上传失败',
+                icon: 'none'
+              });
+            }
+          });
+        }
+      });
+    },
+    // 修改名称
+    changeName: function changeName() {
+      var _this2 = this;
+      uni.showModal({
+        title: '修改名称',
+        content: '请输入新的名称',
+        editable: true,
+        success: function success(res) {
+          if (res.confirm && res.content) {
+            _this2.userInfo.nickName = res.content;
+            uni.setStorageSync('userInfo', _this2.userInfo); // 更新本地缓存
+            _this2.updateUserInfo(); // 调用云函数更新数据库
+            uni.showToast({
+              title: '名称修改成功',
+              icon: 'success'
+            });
+          }
+        }
+      });
+    },
+    // 更新用户信息到数据库
+    updateUserInfo: function updateUserInfo() {
+      var _this3 = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+        var token, res;
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                token = uni.getStorageSync('token');
+                if (token) {
+                  _context.next = 4;
+                  break;
+                }
+                console.error('未找到登录态');
+                return _context.abrupt("return");
+              case 4:
+                _context.prev = 4;
+                _context.next = 7;
+                return uniCloud.callFunction({
+                  name: 'updateUserInfo',
+                  data: {
+                    token: token,
+                    userInfo: _this3.userInfo
+                  }
+                });
+              case 7:
+                res = _context.sent;
+                if (res.result.code === 0) {
+                  console.log('用户信息更新成功');
+                } else {
+                  console.error('用户信息更新失败：', res.result.message);
+                }
+                _context.next = 14;
+                break;
+              case 11:
+                _context.prev = 11;
+                _context.t0 = _context["catch"](4);
+                console.error('请求失败：', _context.t0);
+              case 14:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[4, 11]]);
+      }))();
+    }
+  },
+  onLoad: function onLoad() {
+    // 从本地缓存中获取用户信息
+    var userInfo = uni.getStorageSync('userInfo');
+    if (userInfo) {
+      this.userInfo = userInfo;
     }
   }
 };
 exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 27)["uniCloud"]))
 
 /***/ }),
 

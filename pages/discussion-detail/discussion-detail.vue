@@ -1,33 +1,48 @@
 <template>
 	<view class='tieba'>
 		<view class='main'>
-			<view class='title'>对于异形：夺命舰逆袭有什么看法?</view>
+			<view class='title'>{{detailData.head}}</view>
 			<view class='detail'>
-				<text>如何看待异形：夺命舰票房过十亿</text>
+				<text>{{detailData.detail}}</text>
 				<view class='button'>
 					<u-button size='small' type='primary' plain @click="gotoWriteAnswer">写回答</u-button>
 				</view>
 			</view>
 		</view>
 		<view class='answer_title'>
-			<text>回答 33</text></view>
+			<text>回答 {{detailData.answer.length}}</text></view>
 		<view class='anwserBox'>
-			<tbBox class='box' v-for="item in 10"></tbBox>
+			<QAbox v-for="item in detailData.answer" :key="item._id" :content="item.content"></QAbox>
 		</view>
 	</view>
 </template>
 
 <script>
+
 	export default {
+	
 		data() {
 			return {
-				
+				detailData: {
+					head: '',
+					detail: '',
+					answer: []
+				},
+				discussionId: '' // 存储讨论的 _id
 			};
+		},
+		onLoad() {
+			const eventChannel = this.getOpenerEventChannel();
+			eventChannel.on('sendData', (data) => {
+				this.detailData = data;
+				this.discussionId = data.id; // 接收传递的 _id
+				console.log('接收到的数据：', data);
+			});
 		},
 		methods: {
 			gotoWriteAnswer() {
 				uni.navigateTo({
-					url: '/pages/write-answer/write-answer'
+					url: `/pages/write-answer/write-answer?discussionId=${this.discussionId}`
 				});
 			}
 		}

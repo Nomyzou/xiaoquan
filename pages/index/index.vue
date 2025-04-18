@@ -276,25 +276,67 @@
 			
 			
 			gotoDetail(item) {
-			  let targetPage = '';
-			
-			  if (item.hType === 'dz') {
-			    targetPage = '/pages/companion-detail/companion-detail';
-			  } else if (item.hType === 'xz') {
-			    targetPage = '/pages/auction-detail/auction-detail';
-			  } else if (item.hType === 'tz') {
-			    targetPage = '/pages/discussion-detail/discussion-detail';
-			  } else {
-			    targetPage = '/pages/detail/detail';
-			  }
-			
-			  // 使用 eventChannel 传递 head 和 detail 数据
-			  uni.navigateTo({
-			    url: targetPage,
-			    success: function (res) {
-			      res.eventChannel.emit('sendData', { head: item.head, detail: item.detail });
-			    }
-			  });
+				let targetPage = '';
+				let tableName = '';
+
+				// 根据 type 和 situation 确定目标页面和表名
+				if (item.hType === 'tz') { // 讨论类型
+					if (item.situation === 'inner') {
+						tableName = 'discussion-inner';
+						targetPage = '/pages/discussion-detail/discussion-detail';
+					} else if (item.situation === 'outer') {
+						tableName = 'discussion-outer';
+						targetPage = '/pages/discussion-detail/discussion-detail';
+					}
+				} else if (item.hType === 'dz') { // 搭子类型
+					targetPage = '/pages/companion-detail/companion-detail';
+				} else if (item.hType === 'xz') { // 闲置类型
+					targetPage = '/pages/auction-detail/auction-detail';
+				} else {
+					targetPage = '/pages/detail/detail';
+				}
+
+				// 查询对应表的数据
+				if (tableName) {
+					uniCloud.callFunction({
+						name: 'getDiscussionDetail',
+						data: {
+							tableName: tableName,
+							id: item._id
+						},
+						success: (res) => {
+							if (res.result.code === 0) {
+								const detailData = res.result.data["0"];
+								console.log('detailData',detailData)
+								// 跳转到目标页面并传递数据
+								uni.navigateTo({
+									url: targetPage,
+									success: function (res) {
+										res.eventChannel.emit('sendData', {
+											id:detailData._id,
+											head: detailData.head,
+											detail: detailData.detail,
+											answer: detailData.answers || []
+										});
+									}
+								});
+							} else {
+								console.error('获取讨论详情失败：', res.result.message);
+							}
+						},
+						fail: (err) => {
+							console.error('请求失败：', err);
+						}
+					});
+				} else {
+					// 非讨论类型，直接跳转
+					uni.navigateTo({
+						url: targetPage,
+						success: function (res) {
+							res.eventChannel.emit('sendData', { head: item.head, detail: item.detail });
+						}
+					});
+				}
 			},
 
 		}

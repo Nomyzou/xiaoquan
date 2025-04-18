@@ -214,8 +214,13 @@ var _default = {
     return {
       answerContent: '',
       fileList: [],
-      picUrls: []
+      picUrls: [],
+      discussionId: ''
     };
+  },
+  onLoad: function onLoad(options) {
+    this.discussionId = options.discussionId;
+    console.log(this.discussionId, 'id');
   },
   methods: {
     onSubmit: function onSubmit() {
@@ -292,18 +297,27 @@ var _default = {
                 uniCloud.callFunction({
                   name: 'addAnswer',
                   data: {
+                    discussionId: _this.discussionId,
                     content: _this.answerContent,
                     picUrls: _this.picUrls
+                  },
+                  success: function success(res) {
+                    console.log('res', res);
+                    uni.showToast({
+                      title: '提交成功',
+                      icon: 'success'
+                    });
+                    setTimeout(function () {
+                      uni.navigateBack();
+                    }, 1000);
+                  },
+                  fail: function fail(err) {
+                    console.error('提交失败：', err);
+                    uni.showToast({
+                      title: '提交失败',
+                      icon: 'none'
+                    });
                   }
-                }).then(function (res) {
-                  console.log('res', res);
-                  uni.showToast({
-                    title: '提交成功',
-                    icon: 'success'
-                  });
-                  setTimeout(function () {
-                    uni.navigateBack();
-                  }, 1000);
                 });
               case 10:
               case "end":

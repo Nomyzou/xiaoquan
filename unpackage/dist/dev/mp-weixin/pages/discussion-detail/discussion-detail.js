@@ -104,8 +104,8 @@ try {
     uButton: function () {
       return Promise.all(/*! import() | uview-ui/components/u-button/u-button */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-button/u-button")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 296))
     },
-    tbBox: function () {
-      return __webpack_require__.e(/*! import() | components/tbBox/tbBox */ "components/tbBox/tbBox").then(__webpack_require__.bind(null, /*! @/components/tbBox/tbBox.vue */ 444))
+    QAbox: function () {
+      return __webpack_require__.e(/*! import() | components/QAbox/QAbox */ "components/QAbox/QAbox").then(__webpack_require__.bind(null, /*! @/components/QAbox/QAbox.vue */ 437))
     },
   }
 } catch (e) {
@@ -129,6 +129,15 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var g0 = _vm.detailData.answer.length
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        g0: g0,
+      },
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -189,12 +198,28 @@ exports.default = void 0;
 //
 var _default = {
   data: function data() {
-    return {};
+    return {
+      detailData: {
+        head: '',
+        detail: '',
+        answer: []
+      },
+      discussionId: '' // 存储讨论的 _id
+    };
+  },
+  onLoad: function onLoad() {
+    var _this = this;
+    var eventChannel = this.getOpenerEventChannel();
+    eventChannel.on('sendData', function (data) {
+      _this.detailData = data;
+      _this.discussionId = data.id; // 接收传递的 _id
+      console.log('接收到的数据：', data);
+    });
   },
   methods: {
     gotoWriteAnswer: function gotoWriteAnswer() {
       uni.navigateTo({
-        url: '/pages/write-answer/write-answer'
+        url: "/pages/write-answer/write-answer?discussionId=".concat(this.discussionId)
       });
     }
   }
