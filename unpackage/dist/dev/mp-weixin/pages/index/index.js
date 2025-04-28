@@ -102,13 +102,13 @@ var components
 try {
   components = {
     uPopup: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-popup/u-popup.vue */ 288))
+      return Promise.all(/*! import() | uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-popup/u-popup.vue */ 297))
     },
     uButton: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-button/u-button */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-button/u-button")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 296))
+      return Promise.all(/*! import() | uview-ui/components/u-button/u-button */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-button/u-button")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 305))
     },
     Newsbox: function () {
-      return __webpack_require__.e(/*! import() | components/Newsbox/Newsbox */ "components/Newsbox/Newsbox").then(__webpack_require__.bind(null, /*! @/components/Newsbox/Newsbox.vue */ 306))
+      return __webpack_require__.e(/*! import() | components/Newsbox/Newsbox */ "components/Newsbox/Newsbox").then(__webpack_require__.bind(null, /*! @/components/Newsbox/Newsbox.vue */ 315))
     },
   }
 } catch (e) {
@@ -253,6 +253,10 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
 var _default = {
   data: function data() {
     return {
@@ -260,6 +264,12 @@ var _default = {
       selectedIndex: -1,
       // 初始没有选中项
       selectedIndex1: -1,
+      userInfo: {
+        nickname: "用户" + Math.floor(Math.random() * 10000),
+        avatar: 'https://mp-f64dc8e9-0824-4c0c-bbb7-13f1287eb6e2.cdn.bspapp.com/cloudstorage/one.png',
+        openid: '',
+        token: ''
+      },
       tabName: ['找搭子', '闲置', '讨论', '兼职', '科研', '社团'],
       tabName1: ['项目支持', '推广成果', '科研合作', '广告', '讨论', '兼职'],
       activeName: '',
@@ -317,34 +327,40 @@ var _default = {
               },
               success: function success(res) {
                 if (res.result.code === 0) {
-                  // 将自定义登录态存储在本地缓存中
+                  // 将token存储在本地缓存中
                   wx.setStorageSync('token', res.result.token);
-                  console.log('登录成功，token:', res.result.token);
-                  uni.showToast({
-                    title: '登录成功',
-                    icon: 'success'
-                  });
-                  // 登录成功后关闭弹出窗
+
+                  // 获取用户信息
                   uniCloud.callFunction({
                     name: 'getUserInfo',
                     data: {
-                      token: wx.getStorageSync('token') // 携带自定义登录态
+                      token: res.result.token
                     },
+                    success: function success(userRes) {
+                      if (userRes.result.code === 0) {
+                        // 更新用户信息显示
+                        _this2.userInfo = userRes.result.data;
 
-                    success: function success(res) {
-                      if (res.result.code === 0) {
-                        console.log('业务数据：', res.result.data);
+                        // 更新全局变量
+                        _this2.$globalData.userInfo = {
+                          nickname: userRes.result.data.nickname,
+                          avatar: userRes.result.data.avatar,
+                          token: res.result.token
+                        };
+                        uni.showToast({
+                          title: '登录成功',
+                          icon: 'success'
+                        });
+                        // 登录成功后关闭弹出窗
+                        _this2.closePop();
                       } else {
-                        console.error('获取业务数据失败：', res.result.message);
+                        console.error('获取用户信息失败：', userRes.result.message);
                       }
                     },
                     fail: function fail(err) {
                       console.error('获取用户信息失败：', err);
                     }
                   });
-
-                  // 登录成功后关闭弹出窗
-                  _this2.closePop();
                 } else {
                   console.error('登录失败：', res.result.message);
                   uni.showToast({
@@ -482,6 +498,7 @@ var _default = {
                 url: targetPage,
                 success: function success(res) {
                   res.eventChannel.emit('sendData', {
+                    ID_token: detailData.ID_token,
                     id: detailData._id,
                     head: detailData.head,
                     detail: detailData.detail,

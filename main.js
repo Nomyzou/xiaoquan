@@ -10,15 +10,20 @@ import './uni.promisify.adaptor'
 Vue.use(uView)
 Vue.config.productionTip = false
 App.mpType = 'app'
+
+// 定义全局变量
+Vue.prototype.$globalData = {
+	userInfo: {
+		nickname: '',
+		avatar: '',
+		token: '',
+    openid: ''
+	}
+}
+
 const app = new Vue({
   ...App
 })
-
-Vue.prototype.$globalData = {
-  userInfo: null,
-  openid: '',
-  // 你想存的任何变量
-}
 app.$mount()
 // #endif
 

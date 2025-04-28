@@ -13,6 +13,10 @@
 						<text class="title">小圈 申请</text>
 					</view>
 					<view class="subtitle">获取你的登录信息</view>
+					<view class="user-info">
+						<image class="user-avatar" src="https://mp-f64dc8e9-0824-4c0c-bbb7-13f1287eb6e2.cdn.bspapp.com/cloudstorage/one.png"></image>
+						<text class="username">{{userInfo.nickname}}</text>
+					</view>
 					<view class="button-container">
 						<u-button class="button" round>拒绝</u-button>
 						<view class="spacer"></view>
@@ -87,7 +91,12 @@
 				showPop: false,
 				selectedIndex: -1, // 初始没有选中项
 				selectedIndex1:-1,
-
+				userInfo: {
+					nickname: "用户"+Math.floor(Math.random() * 10000),
+					avatar: 'https://mp-f64dc8e9-0824-4c0c-bbb7-13f1287eb6e2.cdn.bspapp.com/cloudstorage/one.png',
+					openid: '',
+					token: ''
+				},
 				tabName:['找搭子','闲置','讨论','兼职','科研','社团'],
 				tabName1:['项目支持','推广成果','科研合作','广告','讨论','兼职'],
 				activeName:'',
@@ -144,33 +153,41 @@
 								},
 								success: (res) => {
 									if (res.result.code === 0) {
-										// 将自定义登录态存储在本地缓存中
+										// 将token存储在本地缓存中
 										wx.setStorageSync('token', res.result.token);
-										console.log('登录成功，token:', res.result.token);
-										uni.showToast({
-											title: '登录成功',
-											icon: 'success'
-										});
-										// 登录成功后关闭弹出窗
+										
+										// 获取用户信息
 										uniCloud.callFunction({
 											name: 'getUserInfo',
 											data: {
-												token: wx.getStorageSync('token') // 携带自定义登录态
+												token: res.result.token
 											},
-											success: (res) => {
-												if (res.result.code === 0) {
-												console.log('业务数据：', res.result.data);
+											success: (userRes) => {
+												if (userRes.result.code === 0) {
+													// 更新用户信息显示
+													this.userInfo = userRes.result.data;
+													
+													// 更新全局变量
+													this.$globalData.userInfo = {
+														nickname: userRes.result.data.nickname,
+														avatar: userRes.result.data.avatar,
+														token: res.result.token
+													};
+													
+													uni.showToast({
+														title: '登录成功',
+														icon: 'success'
+													});
+													// 登录成功后关闭弹出窗
+													this.closePop();
 												} else {
-												console.error('获取业务数据失败：', res.result.message);
+													console.error('获取用户信息失败：', userRes.result.message);
 												}
 											},
 											fail: (err) => {
 												console.error('获取用户信息失败：', err);
 											}
 										});
-
-										// 登录成功后关闭弹出窗
-										this.closePop();
 									} else {
 										console.error('登录失败：', res.result.message);
 										uni.showToast({
@@ -313,6 +330,7 @@
 									url: targetPage,
 									success: function (res) {
 										res.eventChannel.emit('sendData', {
+											ID_token: detailData.ID_token,
 											id:detailData._id,
 											head: detailData.head,
 											detail: detailData.detail,
@@ -379,11 +397,13 @@
 }
 
 .popup-content {
-	height: 300rpx;
+	height: 400rpx;  // 增加高度以适应新内容
 	padding: 20rpx;
 	padding-top: 40rpx;
 	padding-left: 30rpx;
-	position: relative; /* 为按钮容器提供定位上下文 */
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .header {
@@ -414,15 +434,37 @@
 	margin-bottom: 20rpx;
 }
 
+.user-info {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	margin: 15rpx 0;
+	padding: 15rpx 30rpx;
+	border-top: 1px dashed #ddd;
+	border-bottom: 1px dashed #ddd;
+}
+
+.user-avatar {
+	width: 80rpx;
+	height: 80rpx;
+	border-radius: 50%;
+	margin-right: 20rpx;
+}
+
+.username {
+	font-size: 28rpx;
+	color: #333;
+	line-height: 80rpx;
+}
+
 .button-container {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	width: 90%;
 	padding: 0 20rpx;
-	position: absolute; /* 绝对定位 */
-	bottom: 50rpx; /* 距离底部 20rpx */
-	left: 0; /* 左对齐 */
+	margin-top: 20rpx;
 }
 
 .button {

@@ -1,34 +1,25 @@
 	<template>
 		<view class="newsbox">
 			<view class='header'> 
-			<view :class="['rectangle',typeLabel]"> {{seqNum}}</view> 
-			<view class='channel'> {{title}} </view>
+				<view :class="['rectangle', typeLabel]"> 
+					<text class="seq-num">{{seqNum}}</text>
+				</view> 
+				<text class='channel'>{{title}}</text>
 			</view>
 			<view class='content'>
 				<view class='text'>
-					<view class='te'>
-					{{content}}
-				</view> 
+					<text class='content-text'>{{content}}</text>
 				</view>
 				<view class='pic'>
-					<img :src="pic" class='full-image' />
+					<image :src="displayPic" class='news-image' mode="aspectFill" />
 				</view>
 			</view>
-		
-			
-			
 		</view>
 	</template>
 
 	<script>
 		export default {
 			name:"newsbox",
-			data() {
-				return {
-					
-				};
-				
-			},
 			props:{
 				seqNum:{
 					type:Number,
@@ -36,8 +27,8 @@
 				},
 				title:{
 					type:String,
-					default:"默认标签",
-					},
+					default:"默认标签"
+				},
 				content:{
 					type:String,
 					default:"这里是默认内容"
@@ -45,86 +36,107 @@
 				typeLabel:{
 					type:String,
 					default:'tz'
-					
 				},
-				 defaultPic: {
-				      type: String,
-				      default: '../../static/images/geren.png' // 默认图片路径
-				    },
-				 pic: {
-				      type: Array,
-				      default: () => []
-				    },
-				
+				defaultPic: {
+					type: String,
+					default: '../../static/images/geren.png'
+				},
+				pic: {
+					type: Array,
+					default: () => []
+				}
 			},
 			computed:{
 				displayPic() {
-				      // 如果 picurls 数组为空，则使用默认图片路径
-				      return this.pic.length > 0 ? this.pic[0] : this.defaultPic;
-				    }
+					return this.pic.length > 0 ? this.pic[0] : this.defaultPic;
+				}
 			}
-			
 		}
 	</script>
 
 	<style lang="scss">
-	.newsbox{
-		.header{
-			display: flex;
-			
-		.rectangle{
-			
-			margin-right: 20rpx;
-			width:50rpx;
-			height:40rpx;
-			border-radius: 10rpx; /* 圆角半径 */
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
-		.dz{
-			background: linear-gradient(to right, #ffeb3b, #ffc107); /* 渐变颜色从浅黄色到深黄色 */
-			
-		}
-		.xz{
-			background:linear-gradient(to right,#00AB5B,#0EAB52);
-		}
-		.tz{
-			background:linear-gradient(to right,#0097FF,#24BBFC) ;
-		}
-		}
-		.content{
-		display:flex;
-		justify-content: space-between;
-		overflow: hidden; /* 确保图片不会超出容器 */
+	.newsbox {
+		padding: 20rpx;
+		background-color: #fff;
+		border-radius: 12rpx;
+		margin-bottom: 20rpx;
+		box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
 		
-		.text{
+		.header {
+			display: flex;
+			align-items: center;
+			margin-bottom: 16rpx;
 			
-			flex:1;
-			padding-right: 10rpx;
-			 .te{
-				 display: -webkit-box;
-				  -webkit-box-orient: vertical;
-				  -webkit-line-clamp: 3;
-				  overflow: hidden;
-				  text-overflow: ellipsis;
-			 }
+			.rectangle {
+				width: 50rpx;
+				height: 40rpx;
+				border-radius: 10rpx;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				margin-right: 20rpx;
+				
+				.seq-num {
+					color: #fff;
+					font-size: 24rpx;
+					font-weight: bold;
+				}
+				
+				&.dz {
+					background: linear-gradient(135deg, #ffeb3b, #ffc107);
+				}
+				
+				&.xz {
+					background: linear-gradient(135deg, #00AB5B, #0EAB52);
+				}
+				
+				&.tz {
+					background: linear-gradient(135deg, #0097FF, #24BBFC);
+				}
+			}
+			
+			.channel {
+				font-size: 28rpx;
+				font-weight: bold;
+				color: #333;
+			}
 		}
-	}
-		.pic{
-			width: 230rpx;
-			height: 160rpx;
-			image{
-				width: 100%;
-				height: 100%;
-				object-fit: contain; /* 使图片覆盖容器，同时保持纵横比 */
-
+		
+		.content {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			gap: 20rpx;
+			
+			.text {
+				flex: 1;
+				min-width: 0; // 防止文本溢出
+				
+				.content-text {
+					display: -webkit-box;
+					-webkit-box-orient: vertical;
+					-webkit-line-clamp: 3;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					font-size: 26rpx;
+					color: #666;
+					line-height: 1.5;
+				}
+			}
+			
+			.pic {
+				width: 230rpx;
+				height: 160rpx;
+				border-radius: 8rpx;
+				overflow: hidden;
+				flex-shrink: 0;
+				
+				.news-image {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
 			}
 		}
 	}
-	.full-image {
-  width: 100%; /* 宽度适应父容器 */
-  height: auto; /* 高度根据宽度自动调整，保持比例 */
-  object-fit: contain; /* 确保图片完整显示而不裁剪 */
-}
 	</style>

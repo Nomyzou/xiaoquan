@@ -26,9 +26,12 @@ exports.main = async (event, context) => {
 
     if (user.data.length === 0) {
       // 用户未注册，进行注册
+      const now = new Date();
+      const formattedDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}-${String(now.getHours()).padStart(2, '0')}-${String(now.getMinutes()).padStart(2, '0')}`;
+      
       await userCollection.add({
         openid: openid,
-        createTime: Date.now()
+        createTime: formattedDate
       });
     }
 
@@ -36,11 +39,14 @@ exports.main = async (event, context) => {
     const token = generateToken(openid);
 
     // 将 token 与 openid 和 session_key 关联存储到数据库
+    const now = new Date();
+    const formattedDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}-${String(now.getHours()).padStart(2, '0')}-${String(now.getMinutes()).padStart(2, '0')}`;
+    
     await db.collection('user_tokens').add({
       openid,
       session_key,
       token,
-      createTime: Date.now()
+      createTime: formattedDate
     });
 
     return {

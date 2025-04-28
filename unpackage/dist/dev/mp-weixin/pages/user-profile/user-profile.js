@@ -102,7 +102,7 @@ var components
 try {
   components = {
     Newsbox: function () {
-      return __webpack_require__.e(/*! import() | components/Newsbox/Newsbox */ "components/Newsbox/Newsbox").then(__webpack_require__.bind(null, /*! @/components/Newsbox/Newsbox.vue */ 306))
+      return __webpack_require__.e(/*! import() | components/Newsbox/Newsbox */ "components/Newsbox/Newsbox").then(__webpack_require__.bind(null, /*! @/components/Newsbox/Newsbox.vue */ 315))
     },
   }
 } catch (e) {

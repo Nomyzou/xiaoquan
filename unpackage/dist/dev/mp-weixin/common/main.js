@@ -25,13 +25,17 @@ wx.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;
 _vue.default.use(_uviewUi.default);
 _vue.default.config.productionTip = false;
 _App.default.mpType = 'app';
-var app = new _vue.default(_objectSpread({}, _App.default));
-_vue.default.prototype.$globalData = {
-  userInfo: null,
-  openid: ''
-  // 你想存的任何变量
-};
 
+// 定义全局变量
+_vue.default.prototype.$globalData = {
+  userInfo: {
+    nickname: '',
+    avatar: '',
+    token: '',
+    openid: ''
+  }
+};
+var app = new _vue.default(_objectSpread({}, _App.default));
 createApp(app).$mount();
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["createApp"]))
 

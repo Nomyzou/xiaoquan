@@ -27,8 +27,38 @@
 .QAbox {
   display: flex;
   flex-direction: row;
+  padding: 20rpx;
+  background-color: #fff;
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+.QAbox .userPic {
+  margin-right: 20rpx;
+}
+.QAbox .content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 .QAbox .userInfo {
   display: flex;
   flex-direction: column;
+  margin-bottom: 10rpx;
+}
+.QAbox .userInfo .name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+.QAbox .userInfo .word {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.5;
+}
+.QAbox .time {
+  font-size: 24rpx;
+  color: #999;
+  align-self: flex-end;
 }

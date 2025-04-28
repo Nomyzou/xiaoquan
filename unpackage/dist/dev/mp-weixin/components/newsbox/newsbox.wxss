@@ -24,61 +24,75 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.newsbox {
+  padding: 20rpx;
+  background-color: #fff;
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
 .newsbox .header {
   display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
 }
 .newsbox .header .rectangle {
-  margin-right: 20rpx;
   width: 50rpx;
   height: 40rpx;
   border-radius: 10rpx;
-  /* 圆角半径 */
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 20rpx;
 }
-.newsbox .header .dz {
-  background: linear-gradient(to right, #ffeb3b, #ffc107);
-  /* 渐变颜色从浅黄色到深黄色 */
+.newsbox .header .rectangle .seq-num {
+  color: #fff;
+  font-size: 24rpx;
+  font-weight: bold;
 }
-.newsbox .header .xz {
-  background: linear-gradient(to right, #00AB5B, #0EAB52);
+.newsbox .header .rectangle.dz {
+  background: linear-gradient(135deg, #ffeb3b, #ffc107);
 }
-.newsbox .header .tz {
-  background: linear-gradient(to right, #0097FF, #24BBFC);
+.newsbox .header .rectangle.xz {
+  background: linear-gradient(135deg, #00AB5B, #0EAB52);
+}
+.newsbox .header .rectangle.tz {
+  background: linear-gradient(135deg, #0097FF, #24BBFC);
+}
+.newsbox .header .channel {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
 }
 .newsbox .content {
   display: flex;
   justify-content: space-between;
-  overflow: hidden;
-  /* 确保图片不会超出容器 */
+  align-items: flex-start;
+  gap: 20rpx;
 }
 .newsbox .content .text {
   flex: 1;
-  padding-right: 10rpx;
+  min-width: 0;
 }
-.newsbox .content .text .te {
+.newsbox .content .text .content-text {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.5;
 }
-.newsbox .pic {
+.newsbox .content .pic {
   width: 230rpx;
   height: 160rpx;
+  border-radius: 8rpx;
+  overflow: hidden;
+  flex-shrink: 0;
 }
-.newsbox .pic image {
+.newsbox .content .pic .news-image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  /* 使图片覆盖容器，同时保持纵横比 */
-}
-.full-image {
-  width: 100%;
-  /* 宽度适应父容器 */
-  height: auto;
-  /* 高度根据宽度自动调整，保持比例 */
-  object-fit: contain;
-  /* 确保图片完整显示而不裁剪 */
+  object-fit: cover;
 }

@@ -57,18 +57,35 @@ import { uniCloud } from '@dcloudio/uni-cloud';
 				token: '' // 全局变量存储 token
 			};
 		},
-		onLoad() {
-			// 从本地缓存中获取 token
-			this.token = uni.getStorageSync('token');
-			if (!this.token) {
-				console.error('未找到 token');
-			}
-			else{
-				console.log('token',this.token)
-			}
+			onLoad(options) {
+				// 从本地缓存中获取 token
+				this.token = uni.getStorageSync('token');
+				this.dataValue.ID_token = this.token;
+				if (!this.token) {
+					console.error('未找到 token');
+				}
+				else{
+					console.log('token',this.token)
+				}
+				this.id = options.id;
+				this.title = decodeURIComponent(options.title);
+				this.content = decodeURIComponent(options.content);
 
-
-		},
+				this.isEdit = options.isEdit === 'true';
+				if(this.isEdit){
+					this.dataValue.head = this.title;
+					this.dataValue.detail = this.content;
+				}
+				console.log('接收到的编辑参数：', {
+					id: this.id,
+					title: this.title,
+					content: this.content,
+					isEdit: this.isEdit
+				});
+		
+	
+	
+			},
 		methods:{
 			async onSubmit(e){
 				const that = this

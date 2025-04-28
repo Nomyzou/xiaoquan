@@ -17,7 +17,7 @@
 		},
 		{
 			"path" : "pages/post-home/post-home",
-			"style" : 
+			"style" : 	
 			{
 				"navigationBarTitleText" : ""
 			}
@@ -173,8 +173,8 @@
 			}
 		],
 	"easycom": {
-			"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
-		},
+		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+	},
 
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
