@@ -130,11 +130,13 @@ import { uniCloud } from '@dcloudio/uni-cloud';
 				
 				// 提交帖子
 				let detail = that.dataValue
+				// 将fileList1转换为纯URL数组
+				const picUrls = that.fileList1.map(file => file.url)
 				uniCloud.callFunction({
 					name:'addDiscussion',
 					data:{
 						detail,
-						picurls:that.picUrls,
+						picurls: picUrls, // 使用转换后的URL数组
 						hType:'tz', //渲染到主页的盒子需要标识，然后进入不同的详细页面
 						token: that.token // 使用全局变量中的 token
 					}

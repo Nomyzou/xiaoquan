@@ -6,9 +6,33 @@
   ],
   "subPackages": [
     {
+      "root": "pages/creative_page",
+      "pages": [
+        "creative_page"
+      ]
+    },
+    {
+      "root": "pages/dz-detail",
+      "pages": [
+        "dz-detail"
+      ]
+    },
+    {
       "root": "pages/write-answer",
       "pages": [
         "write-answer"
+      ]
+    },
+    {
+      "root": "pages/login",
+      "pages": [
+        "login"
+      ]
+    },
+    {
+      "root": "pages/phone-login",
+      "pages": [
+        "phone-login"
       ]
     },
     {

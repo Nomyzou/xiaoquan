@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "结伴详情",
+  "usingComponents": {
+    "u-icon": "/uview-ui/components/u-icon/u-icon",
+    "u-divider": "/uview-ui/components/u-divider/u-divider",
+    "u-image": "/uview-ui/components/u-image/u-image"
+  }
+}

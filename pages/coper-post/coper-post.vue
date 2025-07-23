@@ -1,52 +1,71 @@
 <template>
 	<view class='coper'>
 		<view class='header'>
-			<view class='icon'><u-icon name='close'></u-icon></view>
-			
-			<view class='text'>发布合作</view>
-			<view><u-button text='发布' color='#00AB5B' @click="handlePublish"></u-button>
-				</view>
-		</view>
-		<view>
-			<text>需要合作的项目是：</text>
-			<u-input
-		    placeholder="请输入内容"
-		    border="surround"
-		    v-model="formData.head"
-		    @change="change"
-		  ></u-input>
+			<u-icon 
+				name='close' 
+				size="24" 
+				@click="handleClose"
+				:customStyle="{padding: '20rpx'}"
+			></u-icon>
+			<text class='title'>发布合作</text>
+			<u-button 
+				text='发布' 
+				color='#00AB5B' 
+				@click="handlePublish"
+				:customStyle="{width: '120rpx', marginRight: '20rpx'}"
+			></u-button>
 		</view>
 		
-		<view class='content'>
+		<view class='form-container'>
+			<view class='input-group'>
+				<text class='label'>需要合作的项目是：</text>
+				<u-input
+					placeholder="请输入项目名称"
+					border="bottom"
+					v-model="formData.head"
+					@change="change"
+					:customStyle="{padding: '20rpx 0'}"
+				></u-input>
+			</view>
 			
-			<view 
-		      v-for="(item, index) in views" 
-		      :key="index" 
-		      :class="['box', { 'active': activeIndex === index }]" 
-		      @click="setActive(index)">
-		      {{ item }}
-		    </view>
-		</view>
-		<view>
-			<text>请详细描述你的合作内容：</text>
-			<u-input
-			  placeholder="请输入内容"
-			  border="surround"
-			  v-model="formData.detail"
-			  @change="change"
-			></u-input>
-		</view>
-		<view class='cell'>
-			<text>往期风采</text>
-				 <u-upload
-				    :fileList="fileList1"
-				    @afterRead="afterRead"
-				    @delete="deletePic"
-				    name="1"
-				    multiple
-				    :maxCount="10"
-				  ></u-upload>
+			<view class='type-selector'>
+				<text class='label'>选择合作类型：</text>
+				<view class='content'>
+					<view 
+						v-for="(item, index) in views" 
+						:key="index" 
+						:class="['box', { 'active': activeIndex === index }]" 
+						@click="setActive(index)"
+					>
+						{{ item }}
+					</view>
+				</view>
+			</view>
 			
+			<view class='input-group'>
+				<text class='label'>请详细描述你的合作内容：</text>
+				<u-textarea
+					placeholder="请输入详细描述"
+					v-model="formData.detail"
+					@change="change"
+					border="none"
+					auto-height
+					:customStyle="{padding: '20rpx', background: '#F8F8F8', borderRadius: '12rpx'}"
+				></u-textarea>
+			</view>
+			
+			<view class='upload-group'>
+				<text class='label'>往期风采</text>
+				<u-upload
+					:fileList="fileList1"
+					@afterRead="afterRead"
+					@delete="deletePic"
+					name="1"
+					multiple
+					:maxCount="10"
+					:customStyle="{padding: '20rpx 0'}"
+				></u-upload>
+			</view>
 		</view>
 	</view>
 </template>
@@ -174,7 +193,9 @@
 			      });
 			    },
 			  handleClose() {
-			      uni.navigateBack();
+			      uni.reLaunch({
+			          url: '/pages/post-home/post-home'
+			      });
 			    },
 			
 			async handlePublish() {
@@ -213,56 +234,80 @@
 </script>
 
 <style lang="scss">
-.coper{
-	.header{
+.coper {
+	padding: 30rpx;
+	background-color: #F8F8F8;
+	min-height: 100vh;
+	
+	.header {
 		display: flex;
-		flex-direction: row;
 		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 40rpx;
+		position: relative;
+		height: 80rpx;
 		
-	}
-	.type{
-		    .demo-layout {
-		        height: 25px;
-		        border-radius: 4px;
-		    }
-		    .bg-purple {
-		        background: #CED7E1;
-		    }
-			.bg-purple-light{
-				background: #e5e9f2;
-
-			}
-			
-			
-			
-	}
-	.content{
-		display: flex;
-		flex-direction: row;
-		justify-content: space-around;	
-		flex-wrap: wrap; /* 允许换行 */
-		padding: 20rpx;
-		.box{
-			width: 40%;
-			margin-right: 20rpx;
-			margin-bottom: 20rpx;
-			background-color: #F8F8F8;
-			height: 60rpx;
-			border-radius: 8rpx;
-			display: flex;
-			justify-content: center;
-			align-items: center; /* 垂直居中 */
-			
+		.title {
+			font-size: 36rpx;
+			font-weight: 600;
+			color: #333;
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
 		}
-			
-	.active{
-		background-color: #ecfdef;
-		border: 1rpx solid seagreen;
-		font-weight: 600;
-		color: lightseagreen;
 	}
+	
+	.form-container {
+		background-color: #FFFFFF;
+		border-radius: 20rpx;
+		padding: 30rpx;
+		box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+		
+		.label {
+			font-size: 30rpx;
+			color: #333;
+			font-weight: 500;
+			margin-bottom: 20rpx;
+			display: block;
+		}
+		
+		.input-group {
+			margin-bottom: 40rpx;
+		}
+		
+		.type-selector {
+			margin-bottom: 40rpx;
+			
+			.content {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 20rpx;
+				
+				.box {
+					width: calc(50% - 10rpx);
+					height: 80rpx;
+					background: linear-gradient(135deg, #F5F7FA, #E4E7EB);
+					border-radius: 12rpx;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					font-size: 28rpx;
+					color: #666;
+					transition: all 0.3s ease;
+					
+					&.active {
+						background: linear-gradient(135deg, #E3F9E5, #C8E6C9);
+						color: #00AB5B;
+						font-weight: 600;
+						box-shadow: 0 4rpx 12rpx rgba(0, 171, 91, 0.2);
+					}
+				}
+			}
+		}
+		
+		.upload-group {
+			margin-top: 40rpx;
+		}
 	}
 }
-
-
 </style>

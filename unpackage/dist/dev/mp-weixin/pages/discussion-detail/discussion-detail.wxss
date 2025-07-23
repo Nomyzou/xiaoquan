@@ -25,48 +25,100 @@
 /* 透明度 */
 /* 文章场景相关 */
 .tieba {
-  background-color: #F8F8F8;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+  min-height: 100vh;
 }
 .tieba .main {
-  background-color: white;
-  padding-left: 2%;
-  padding-bottom: 50rpx;
+  padding: 30rpx;
 }
 .tieba .main .title-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2%;
+  margin-bottom: 30rpx;
 }
 .tieba .main .title-container .title {
-  width: 90%;
-  font-weight: 600;
   font-size: 40rpx;
+  font-weight: bold;
+  background: linear-gradient(120deg, #2c3e50 0%, #3498db 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+  flex: 1;
+  margin-right: 20rpx;
 }
-.tieba .main .title-container .more-button {
-  width: 10%;
-  text-align: right;
+.tieba .main .title-container .more-button .more-icon {
   font-size: 40rpx;
-  color: #2979ff;
-  cursor: pointer;
+  color: #666;
+  letter-spacing: 4rpx;
 }
-.tieba .main .detail {
-  position: relative;
+.tieba .main .detail .content-card {
+  background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+  border-radius: 24rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.05);
 }
-.tieba .main .detail .button {
-  margin-left: 70%;
-  width: 20%;
+.tieba .main .detail .content-card .content-text {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 30rpx;
 }
-.tieba .answer_title {
-  padding-left: 2%;
-  font-weight: 500;
-  background-color: #F8F8F8;
-  height: 100rpx;
+.tieba .main .detail .content-card .image-gallery {
   display: flex;
-  align-items: center;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
-  /* 灰色阴影 */
+  flex-wrap: wrap;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
 }
-.tieba .anwserBox .box {
+.tieba .main .detail .content-card .image-gallery .gallery-image {
+  width: 320rpx;
+  height: 320rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+.tieba .main .detail .content-card .image-gallery .gallery-image:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+}
+.tieba .answer-section {
+  margin-top: 30rpx;
+}
+.tieba .answer-section .answer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(120deg, #00c6fb 0%, #005bea 100%);
+  padding: 30rpx;
+  border-radius: 24rpx 24rpx 0 0;
+  box-shadow: 0 4rpx 20rpx rgba(0, 198, 251, 0.1);
+}
+.tieba .answer-section .answer-header .answer-title .answer-count {
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: bold;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+.tieba .answer-section .answer-header .write-answer-btn .button-text {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #fff;
+}
+.tieba .answer-section .answer-box {
+  background: #fff;
+  border-radius: 0 0 24rpx 24rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.05);
+}
+.tieba .answer-section .answer-box .box {
   margin-top: 40rpx;
+  padding: 20rpx;
+  background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+.tieba .answer-section .answer-box .box:hover {
+  -webkit-transform: translateY(-2rpx);
+          transform: translateY(-2rpx);
+  box-shadow: 0 4rpx 15rpx rgba(0, 0, 0, 0.1);
 }

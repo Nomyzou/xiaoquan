@@ -24,19 +24,22 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.page {
-  display: flex;
-  flex-direction: column;
-  height: 1200rpx;
-  background-color: #FFF;
+.write-answer-container {
+  padding: 30rpx;
 }
-.page .header {
-  padding: 5rpx 20rpx;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+.write-answer-container .question-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30rpx;
+  padding: 20rpx;
+  background-color: #f8f9fa;
+  border-radius: 12rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
 }
-.page .header .text {
-  font-size: 40rpx;
-  font-weight: 600;
+.write-answer-container .answer-form {
+  margin-bottom: 40rpx;
+}
+.write-answer-container .submit-area {
+  padding: 20rpx 0;
 }

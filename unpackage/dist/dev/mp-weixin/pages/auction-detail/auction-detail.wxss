@@ -24,39 +24,110 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.esDetail .header {
-  padding: 50rpx 50rpx 0 0;
+.auction-detail {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+  min-height: 100vh;
 }
-.esDetail .header .user {
+.auction-detail .main {
+  padding: 30rpx;
+}
+.auction-detail .main .title-container {
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 0;
+  margin-bottom: 30rpx;
 }
-.esDetail .header .price .fh {
-  font-size: 50rpx;
-  color: darkred;
+.auction-detail .main .title-container .title {
+  font-size: 40rpx;
+  font-weight: bold;
+  background: linear-gradient(120deg, #2c3e50 0%, #3498db 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+  flex: 1;
+  margin-right: 20rpx;
 }
-.esDetail .header .price .number {
-  font-size: 75rpx;
-  color: #F72525;
+.auction-detail .main .title-container .more-button .more-icon {
+  font-size: 40rpx;
+  color: #666;
+  letter-spacing: 4rpx;
 }
-.esDetail .detail {
+.auction-detail .main .detail .image-gallery {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
 }
-.esDetail .images {
+.auction-detail .main .detail .image-gallery .gallery-image {
+  width: 220rpx;
+  height: 220rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+.auction-detail .main .detail .image-gallery .gallery-image:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+}
+.auction-detail .main .detail .content .info-card {
+  background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+  border-radius: 24rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.05);
+}
+.auction-detail .main .detail .content .info-card .description {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 30rpx;
+}
+.auction-detail .main .detail .content .info-card .price-info {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  margin-bottom: 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 2rpx solid rgba(0, 0, 0, 0.05);
 }
-.esDetail .QA .card .user {
+.auction-detail .main .detail .content .info-card .price-info .price-item .label {
+  font-size: 24rpx;
+  color: #666;
+  margin-right: 10rpx;
+}
+.auction-detail .main .detail .content .info-card .price-info .price-item .value {
+  font-size: 36rpx;
+  background: linear-gradient(120deg, #ff4d4f 0%, #ff7875 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: bold;
+}
+.auction-detail .main .detail .content .info-card .type-info, .auction-detail .main .detail .content .info-card .time-info {
+  margin-bottom: 20rpx;
   display: flex;
-  flex-direction: row;
+  align-items: center;
 }
-.esDetail .QA .card .user .user_info {
-  display: flex;
-  flex-direction: column;
+.auction-detail .main .detail .content .info-card .type-info .label, .auction-detail .main .detail .content .info-card .time-info .label {
+  font-size: 26rpx;
+  color: #666;
+  margin-right: 20rpx;
+  min-width: 120rpx;
 }
-.esDetail .gap {
-  padding: 20rpx;
-  font-size: 50rpx;
-  font-weight: 500;
+.auction-detail .main .detail .content .info-card .type-info .value, .auction-detail .main .detail .content .info-card .time-info .value {
+  font-size: 28rpx;
+  color: #333;
+}
+.auction-detail .main .detail .content .info-card .type-info .value.type-tag, .auction-detail .main .detail .content .info-card .time-info .value.type-tag {
+  background: linear-gradient(120deg, #00c6fb 0%, #005bea 100%);
+  color: #fff;
+  padding: 6rpx 20rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+}
+.auction-detail .main .detail .button {
+  margin-top: 40rpx;
+  padding: 0 20rpx;
+}
+.auction-detail .main .detail .button .button-text {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #fff;
 }

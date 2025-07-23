@@ -1,0 +1,7 @@
+{
+  "name": "getJobDetail",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

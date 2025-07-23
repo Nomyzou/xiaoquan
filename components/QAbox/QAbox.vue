@@ -1,12 +1,12 @@
 <template>
 	<view class='QAbox'>
 		<view class='userPic'>
-			<u-image src="https://cdn.uviewui.com/uview/album/1.jpg" shape="circle" width="80rpx" height="80rpx"></u-image>
+			<u-image :src="userInfo.avatarUrl" shape="circle" width="80rpx" height="80rpx"></u-image>
 		</view>
 		
 		<view class='content-wrapper'>
 			<view class='userInfo'>
-				<text class='name'>小凡古</text>
+				<text class='name'>{{  userInfo.nickName }}</text>
 				<text class='word'>{{ content }}</text>
 			</view>
 			
@@ -21,7 +21,14 @@
 		props: {
 			content: {
 				type: String,
-				default: '我想知道问题是什么'
+				default: ''
+			},
+			userInfo: {
+				type: Object,
+				default: () => ({
+					nickName: '未知用户',
+					avatarUrl: 'https://cdn.uviewui.com/uview/album/1.jpg'
+				})
 			}
 		},
 		data() {

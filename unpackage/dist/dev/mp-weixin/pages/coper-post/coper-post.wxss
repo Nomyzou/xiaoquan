@@ -24,44 +24,70 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.coper {
+  padding: 30rpx;
+  background-color: #F8F8F8;
+  min-height: 100vh;
+}
 .coper .header {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40rpx;
+  position: relative;
+  height: 80rpx;
 }
-.coper .type .demo-layout {
-  height: 25px;
-  border-radius: 4px;
+.coper .header .title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
 }
-.coper .type .bg-purple {
-  background: #CED7E1;
+.coper .form-container {
+  background-color: #FFFFFF;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
 }
-.coper .type .bg-purple-light {
-  background: #e5e9f2;
-}
-.coper .content {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  /* 允许换行 */
-  padding: 20rpx;
-}
-.coper .content .box {
-  width: 40%;
-  margin-right: 20rpx;
+.coper .form-container .label {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: 500;
   margin-bottom: 20rpx;
-  background-color: #F8F8F8;
-  height: 60rpx;
-  border-radius: 8rpx;
+  display: block;
+}
+.coper .form-container .input-group {
+  margin-bottom: 40rpx;
+}
+.coper .form-container .type-selector {
+  margin-bottom: 40rpx;
+}
+.coper .form-container .type-selector .content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+.coper .form-container .type-selector .content .box {
+  width: calc(50% - 10rpx);
+  height: 80rpx;
+  background: linear-gradient(135deg, #F5F7FA, #E4E7EB);
+  border-radius: 12rpx;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* 垂直居中 */
+  font-size: 28rpx;
+  color: #666;
+  transition: all 0.3s ease;
 }
-.coper .content .active {
-  background-color: #ecfdef;
-  border: 1rpx solid seagreen;
+.coper .form-container .type-selector .content .box.active {
+  background: linear-gradient(135deg, #E3F9E5, #C8E6C9);
+  color: #00AB5B;
   font-weight: 600;
-  color: lightseagreen;
+  box-shadow: 0 4rpx 12rpx rgba(0, 171, 91, 0.2);
+}
+.coper .form-container .upload-group {
+  margin-top: 40rpx;
 }

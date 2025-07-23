@@ -24,55 +24,107 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.apply .title.data-v-4bfb8df4 {
-  width: 100%;
-  padding-left: 40%;
-  padding-top: 40rpx;
-  font-size: x-large;
-  margin-bottom: 200rpx;
+.apply.data-v-4bfb8df4 {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+  padding: 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.apply .title-container.data-v-4bfb8df4 {
+  text-align: center;
+  margin-bottom: 60rpx;
+  margin-top: 40rpx;
+}
+.apply .title-container .title.data-v-4bfb8df4 {
+  font-size: 48rpx;
+  font-weight: bold;
+  background: linear-gradient(120deg, #2c3e50 0%, #3498db 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+  display: block;
+  margin-bottom: 20rpx;
+}
+.apply .title-container .subtitle.data-v-4bfb8df4 {
+  font-size: 28rpx;
+  color: #666;
 }
 .apply .window.data-v-4bfb8df4 {
-  width: 750rpx;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  height: 700rpx;
-}
-.apply .window .window1.data-v-4bfb8df4 {
-  height: 300rpx;
-  padding: 20rpx;
-  width: 30%;
-  background-color: wheat;
-}
-.apply .window .window1 image.data-v-4bfb8df4 {
-  height: 300rpx;
   width: 100%;
-  margin-bottom: 30rpx;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 60rpx;
 }
-.apply .window .window1 text.data-v-4bfb8df4 {
-  padding: 30%;
-  font-weight: 600;
-  color: peachpuff;
+.apply .window .window1.data-v-4bfb8df4, .apply .window .window2.data-v-4bfb8df4 {
+  width: 45%;
+  height: 600rpx;
+  border-radius: 24rpx;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+.apply .window .window1.data-v-4bfb8df4:active, .apply .window .window2.data-v-4bfb8df4:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+}
+.apply .window .window1.active.data-v-4bfb8df4, .apply .window .window2.active.data-v-4bfb8df4 {
+  -webkit-transform: translateY(-10rpx);
+          transform: translateY(-10rpx);
+  box-shadow: 0 8rpx 30rpx rgba(0, 0, 0, 0.15);
+}
+.apply .window .window1 .image-container.data-v-4bfb8df4, .apply .window .window2 .image-container.data-v-4bfb8df4 {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.apply .window .window1 .image-container image.data-v-4bfb8df4, .apply .window .window2 .image-container image.data-v-4bfb8df4 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.apply .window .window1 .image-container .overlay.data-v-4bfb8df4, .apply .window .window2 .image-container .overlay.data-v-4bfb8df4 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6));
+}
+.apply .window .window1 .content.data-v-4bfb8df4, .apply .window .window2 .content.data-v-4bfb8df4 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40rpx;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  color: #fff;
+}
+.apply .window .window1 .content .role.data-v-4bfb8df4, .apply .window .window2 .content .role.data-v-4bfb8df4 {
+  font-size: 36rpx;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10rpx;
+}
+.apply .window .window1 .content .description.data-v-4bfb8df4, .apply .window .window2 .content .description.data-v-4bfb8df4 {
+  font-size: 24rpx;
+  opacity: 0.9;
 }
 .apply .window .window1.active.data-v-4bfb8df4 {
-  border: 5px solid #DFAB2D;
-}
-.apply .window .window2.data-v-4bfb8df4 {
-  padding: 20rpx;
-  width: 30%;
-  height: 300rpx;
-  background-color: #2EC4D0;
-}
-.apply .window .window2 image.data-v-4bfb8df4 {
-  height: 300rpx;
-  width: 100%;
-  margin-bottom: 30rpx;
-}
-.apply .window .window2 text.data-v-4bfb8df4 {
-  padding: 30%;
-  font-weight: 600;
-  color: lightseagreen;
+  border: 4rpx solid #6a11cb;
 }
 .apply .window .window2.active.data-v-4bfb8df4 {
-  border: 5px solid #07A285;
+  border: 4rpx solid #2575fc;
+}
+.apply .button-container.data-v-4bfb8df4 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 40rpx;
+}
+.apply .button-container .button-text.data-v-4bfb8df4 {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #fff;
 }

@@ -3,6 +3,9 @@
   "usingComponents": {
     "u-icon": "/uview-ui/components/u-icon/u-icon",
     "u-divider": "/uview-ui/components/u-divider/u-divider",
-    "u-image": "/uview-ui/components/u-image/u-image"
+    "u-image": "/uview-ui/components/u-image/u-image",
+    "u-button": "/uview-ui/components/u-button/u-button",
+    "q-abox": "/components/QAbox/QAbox",
+    "u-popup": "/uview-ui/components/u-popup/u-popup"
   }
 }

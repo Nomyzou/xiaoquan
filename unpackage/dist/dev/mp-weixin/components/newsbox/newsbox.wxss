@@ -31,6 +31,145 @@
   margin-bottom: 20rpx;
   box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
 }
+.newsbox.job-box {
+  padding: 0;
+  overflow: hidden;
+}
+.newsbox.job-box .job-container {
+  display: flex;
+  height: 180rpx;
+}
+.newsbox.job-box .job-container .job-left {
+  width: 25%;
+  background: linear-gradient(135deg, #2D3436, #4A5859);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.newsbox.job-box .job-container .job-left::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2rpx;
+  background: linear-gradient(to right, transparent, rgba(255, 215, 0, 0.5), transparent);
+}
+.newsbox.job-box .job-container .job-left::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2rpx;
+  background: linear-gradient(to right, transparent, rgba(255, 215, 0, 0.5), transparent);
+}
+.newsbox.job-box .job-container .job-left .job-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.newsbox.job-box .job-container .job-left .job-text-container::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  bottom: 15%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 215, 0, 0.3), transparent);
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+.newsbox.job-box .job-container .job-left .job-text {
+  font-family: "Baskerville", "Didot", "Bodoni MT", serif;
+  font-style: italic;
+  color: #D4AF37;
+  text-align: center;
+  position: relative;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+.newsbox.job-box .job-container .job-left .job-text::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #D4AF37, transparent);
+  left: 10%;
+  right: 10%;
+}
+.newsbox.job-box .job-container .job-left .job-text.job-we {
+  font-size: 34rpx;
+  letter-spacing: 1rpx;
+  -webkit-transform: rotate(-2deg);
+          transform: rotate(-2deg);
+  margin-bottom: 2rpx;
+}
+.newsbox.job-box .job-container .job-left .job-text.job-we::after {
+  bottom: -2rpx;
+}
+.newsbox.job-box .job-container .job-left .job-text.job-want {
+  font-size: 38rpx;
+  letter-spacing: 0;
+  margin-bottom: 2rpx;
+}
+.newsbox.job-box .job-container .job-left .job-text.job-want::after {
+  bottom: -2rpx;
+}
+.newsbox.job-box .job-container .job-left .job-text.job-you {
+  font-size: 44rpx;
+  letter-spacing: 1rpx;
+  -webkit-transform: rotate(2deg);
+          transform: rotate(2deg);
+}
+.newsbox.job-box .job-container .job-left .job-text.job-you::before {
+  content: "~";
+  position: absolute;
+  bottom: -15rpx;
+  left: 50%;
+  -webkit-transform: translateX(-50%) scaleX(2);
+          transform: translateX(-50%) scaleX(2);
+  font-size: 24rpx;
+  color: rgba(212, 175, 55, 0.7);
+}
+.newsbox.job-box .job-container .job-right {
+  width: 75%;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(to right, #f8f9fa, #ffffff);
+}
+.newsbox.job-box .job-container .job-right .job-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.newsbox.job-box .job-container .job-right .job-salary {
+  font-size: 28rpx;
+  color: #2D3436;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+.newsbox.job-box .job-container .job-right .job-salary::before {
+  content: "";
+  display: inline-block;
+  width: 8rpx;
+  height: 8rpx;
+  border-radius: 50%;
+  background-color: #D4AF37;
+  margin-right: 10rpx;
+}
 .newsbox .header {
   display: flex;
   align-items: center;
@@ -58,6 +197,9 @@
 }
 .newsbox .header .rectangle.tz {
   background: linear-gradient(135deg, #0097FF, #24BBFC);
+}
+.newsbox .header .rectangle.jz {
+  background: linear-gradient(135deg, #2D3436, #4A5859);
 }
 .newsbox .header .channel {
   font-size: 28rpx;

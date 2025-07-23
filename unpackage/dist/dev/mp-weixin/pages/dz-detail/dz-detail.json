@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "搭子界面",
+  "usingComponents": {
+    "u-button": "/uview-ui/components/u-button/u-button"
+  }
+}

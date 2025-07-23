@@ -25,7 +25,36 @@
 	]
 		
 	,
-	"subPackages": [{
+	"subPackages": [
+		{
+			"root":"pages/creative_page",
+			"pages": [
+				{
+					"path":"creative_page",
+					"style": {
+						"navigationBarTitleText": "创作界面"
+					}
+				}
+				
+			]
+		}
+			,
+		{
+			"root":"pages/dz-detail",
+			"pages": [
+				{
+					"path":"dz-detail",
+					"style": {
+						"navigationBarTitleText": "搭子界面"
+					}
+				}
+				
+			]
+		}
+			,
+		
+		
+		{
 		"root":"pages/write-answer",
 		"pages": [
 			{
@@ -38,6 +67,30 @@
 		]
 	}
 		,
+		{
+			"root":"pages/login",
+			"pages": [
+				{
+					"path":"login",
+					"style": {
+						"navigationBarTitleText": "登录"
+					}
+				}
+				
+			]
+		}
+			,
+			{
+				"root": "pages/phone-login",
+				"pages": [
+					{
+						"path": "phone-login",
+						"style": {
+							"navigationBarTitleText": "注册"
+						}
+					}
+				]
+			},
 		{
 			"root": "pages/employer-input",
 			"pages": [

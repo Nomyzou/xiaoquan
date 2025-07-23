@@ -1,38 +1,41 @@
 <template>
 	<view>
-	<view class='user-box'>
-		<view class='user-info'>
-			<image :src="userInfo.avatarUrl" @click="uploadAvatar"></image>
-			<text class='name' @click="changeName">{{ userInfo.nickName }}</text>
+		<!-- 设置按钮 -->
+		<view class="settings-btn" @click="goToLogin">
+			<u-icon name="setting" size="40" color="#333"></u-icon>
 		</view>
 		
-		<view class='tabs' >
-			<view class='box'>
-				<view class='number'>0</view>
-				<view class='text'>创作</view>
+		<view class='user-box'>
+			<view class='user-info'>
+				<image :src="userInfo.avatarUrl" @click="uploadAvatar"></image>
+				<text class='name' @click="changeName">{{ userInfo.nickName }}</text>
 			</view>
-			<view class='box'>
-				<view class='number'>0</view>
-				<view class='text'>赞同</view>
-			</view>
-			<view class='box'>
-				<view class='number'>0</view>
-				<view class='text'>喜欢</view>
-			</view>
-			<view class='box'>
-				<view class='number'>0</view>
-				<view class='text'>收藏</view>
-			</view>	
 			
+			<view class='tabs' >
+				<view class='box'>
+					<view class='number'>0</view>
+					<view class='text'>创作</view>
+				</view>
+				<view class='box'>
+					<view class='number'>0</view>
+					<view class='text'>赞同</view>
+				</view>
+				<view class='box'>
+					<view class='number'>0</view>
+					<view class='text'>喜欢</view>
+				</view>
+				<view class='box'>
+					<view class='number'>0</view>
+					<view class='text'>收藏</view>
+				</view>	
+			</view>
 		</view>
-	</view>
-	<view class='recently-viewed'>
-		<view class='title'>最近游览</view>
-		<view class='newsbox' v-for='i in 10'>
-			<Newsbox @click.native="gotoDetail"></Newsbox>
+		<view class='recently-viewed'>
+			<view class='title'>最近游览</view>
+			<view class='newsbox' v-for='i in 10'>
+				<Newsbox @click.native="gotoDetail"></Newsbox>
+			</view>
 		</view>
-		</view>
-		
 	</view>
 </template>
 
@@ -42,7 +45,7 @@
 			return {
 				userInfo: {
 					avatarUrl: 'https://cdn.uviewui.com/uview/album/1.jpg', // 默认头像
-					nickName: '小凡古' // 默认名称
+					nickName: '未登录' // 默认名称
 				}
 			};
 		},
@@ -54,6 +57,16 @@
 			},
 			// 上传头像
 			uploadAvatar() {
+				// 检查是否已登录
+				const token = uni.getStorageSync('token');
+				if (!token) {
+					uni.showToast({
+						title: '请先登录',
+						icon: 'none'
+					});
+					return;
+				}
+
 				uni.chooseImage({
 					count: 1,
 					sizeType: ['compressed'],
@@ -65,7 +78,11 @@
 							filePath: tempFilePath,
 							success: (uploadRes) => {
 								this.userInfo.avatarUrl = uploadRes.fileID;
-								uni.setStorageSync('userInfo', this.userInfo); // 更新本地缓存
+								// 更新本地存储的用户信息
+								const userInfo = uni.getStorageSync('userInfo');
+								userInfo.avatarUrl = uploadRes.fileID;
+								uni.setStorageSync('userInfo', userInfo);
+								
 								this.updateUserInfo(); // 调用云函数更新数据库
 								uni.showToast({
 									title: '头像上传成功',
@@ -85,6 +102,16 @@
 			},
 			// 修改名称
 			changeName() {
+				// 检查是否已登录
+				const token = uni.getStorageSync('token');
+				if (!token) {
+					uni.showToast({
+						title: '请先登录',
+						icon: 'none'
+					});
+					return;
+				}
+
 				uni.showModal({
 					title: '修改名称',
 					content: '请输入新的名称',
@@ -92,7 +119,11 @@
 					success: (res) => {
 						if (res.confirm && res.content) {
 							this.userInfo.nickName = res.content;
-							uni.setStorageSync('userInfo', this.userInfo); // 更新本地缓存
+							// 更新本地存储的用户信息
+							const userInfo = uni.getStorageSync('userInfo');
+							userInfo.nickName = res.content;
+							uni.setStorageSync('userInfo', userInfo);
+							
 							this.updateUserInfo(); // 调用云函数更新数据库
 							uni.showToast({
 								title: '名称修改成功',
@@ -126,10 +157,24 @@
 				} catch (err) {
 					console.error('请求失败：', err);
 				}
+			},
+			// 跳转到登录页面
+			goToLogin() {
+				uni.navigateTo({
+					url: '/pages/login/login'
+				});
 			}
 		},
 		onLoad() {
 			// 从本地缓存中获取用户信息
+			const userInfo = uni.getStorageSync('userInfo');
+			if (userInfo) {
+				this.userInfo = userInfo;
+			}
+		},
+		// 添加页面显示时的检查
+		onShow() {
+			// 每次页面显示时都检查最新的用户信息
 			const userInfo = uni.getStorageSync('userInfo');
 			if (userInfo) {
 				this.userInfo = userInfo;
@@ -200,5 +245,17 @@
 		cursor: pointer;
 	}
 	}
+}
+
+// 设置按钮样式
+.settings-btn {
+	position: fixed;
+	top: 40rpx;
+	right: 40rpx;
+	z-index: 100;
+	padding: 20rpx;
+	background-color: rgba(255, 255, 255, 0.8);
+	border-radius: 50%;
+	box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
 }
 </style>

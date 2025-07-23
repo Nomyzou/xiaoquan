@@ -1,0 +1,170 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/user-profile/user-profile",
+    "pages/post-home/post-home"
+  ],
+  "subPackages": [
+    {
+      "root": "pages/write-answer",
+      "pages": [
+        "write-answer"
+      ]
+    },
+    {
+      "root": "pages/login",
+      "pages": [
+        "login"
+      ]
+    },
+    {
+      "root": "pages/phone-login",
+      "pages": [
+        "phone-login"
+      ]
+    },
+    {
+      "root": "pages/employer-input",
+      "pages": [
+        "employer-input"
+      ]
+    },
+    {
+      "root": "pages/job-search-input",
+      "pages": [
+        "job-search-input"
+      ]
+    },
+    {
+      "root": "pages/dicuss-post-outer",
+      "pages": [
+        "dicuss-post-outer"
+      ]
+    },
+    {
+      "root": "pages/job_search",
+      "pages": [
+        "job_search"
+      ]
+    },
+    {
+      "root": "pages/auction-post",
+      "pages": [
+        "auction-post"
+      ]
+    },
+    {
+      "root": "pages/companion-post",
+      "pages": [
+        "companion-post"
+      ]
+    },
+    {
+      "root": "pages/discussion-post",
+      "pages": [
+        "discussion-post"
+      ]
+    },
+    {
+      "root": "pages/coper-post",
+      "pages": [
+        "coper-post"
+      ]
+    },
+    {
+      "root": "pages/freelance-post",
+      "pages": [
+        "freelance-post"
+      ]
+    },
+    {
+      "root": "pages/auction-detail",
+      "pages": [
+        "auction-detail"
+      ]
+    },
+    {
+      "root": "pages/discussion-detail",
+      "pages": [
+        "discussion-detail"
+      ]
+    },
+    {
+      "root": "pages/companion-detail",
+      "pages": [
+        "companion-detail"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#666",
+    "selectedColor": "#31c27c",
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/index/index",
+        "iconPath": "static/shouye-copy.png",
+        "selectedIconPath": "static/shouye-copy-3_副本.png"
+      },
+      {
+        "text": "发帖",
+        "pagePath": "pages/post-home/post-home",
+        "iconPath": "static/tianjia.png"
+      },
+      {
+        "text": "个人",
+        "pagePath": "pages/user-profile/user-profile",
+        "iconPath": "static/geren.png",
+        "selectedIconPath": "static/geren-2.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "需要识别人员以确定身份"
+    }
+  },
+  "usingComponents": {
+    "van-button": "/wxcomponents/vant/button/index",
+    "van-card": "/wxcomponents/vant/card/index",
+    "van-cell": "/wxcomponents/vant/cell/index",
+    "van-cell-group": "/wxcomponents/vant/cell-group/index",
+    "van-checkbox": "/wxcomponents/vant/checkbox/index",
+    "van-checkbox-group": "/wxcomponents/vant/checkbox-group/index",
+    "van-col": "/wxcomponents/vant/col/index",
+    "van-dialog": "/wxcomponents/vant/dialog/index",
+    "van-field": "/wxcomponents/vant/field/index",
+    "van-goods-action": "/wxcomponents/vant/goods-action/index",
+    "van-goods-action-icon": "/wxcomponents/vant/goods-action-icon/index",
+    "van-goods-action-button": "/wxcomponents/vant/goods-action-button/index",
+    "van-icon": "/wxcomponents/vant/icon/index",
+    "van-loading": "/wxcomponents/vant/loading/index",
+    "van-nav-bar": "/wxcomponents/vant/nav-bar/index",
+    "van-notice-bar": "/wxcomponents/vant/notice-bar/index",
+    "van-notify": "/wxcomponents/vant/notify/index",
+    "van-panel": "/wxcomponents/vant/panel/index",
+    "van-steps": "/wxcomponents/vant/steps/index",
+    "van-submit-bar": "/wxcomponents/vant/submit-bar/index",
+    "van-swipe-cell": "/wxcomponents/vant/swipe-cell/index",
+    "van-switch": "/wxcomponents/vant/switch/index",
+    "van-tab": "/wxcomponents/vant/tab/index",
+    "van-tabs": "/wxcomponents/vant/tabs/index",
+    "van-tabbar": "/wxcomponents/vant/tabbar/index",
+    "van-tabbar-item": "/wxcomponents/vant/tabbar-item/index",
+    "van-tag": "/wxcomponents/vant/tag/index",
+    "van-toast": "/wxcomponents/vant/toast/index",
+    "van-transition": "/wxcomponents/vant/transition/index",
+    "van-tree-select": "/wxcomponents/vant/tree-select/index",
+    "van-datetime-picker": "/wxcomponents/vant/datetime-picker/index",
+    "van-rate": "/wxcomponents/vant/rate/index",
+    "van-collapse": "/wxcomponents/vant/collapse/index",
+    "van-collapse-item": "/wxcomponents/vant/collapse-item/index",
+    "van-picker": "/wxcomponents/vant/picker/index"
+  }
+}

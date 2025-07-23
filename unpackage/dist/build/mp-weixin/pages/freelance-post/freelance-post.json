@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "自由职业帖子",
+  "usingComponents": {
+    "u-button": "/uview-ui/components/u-button/u-button"
+  }
+}

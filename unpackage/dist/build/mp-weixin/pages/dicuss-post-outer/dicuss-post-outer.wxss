@@ -1,0 +1,1 @@
+.page{display:flex;flex-direction:column;height:1200rpx;background-color:#fff}.page .header{padding:5rpx 20rpx;display:flex;flex-direction:row;justify-content:space-between}.page .header .text{font-size:40rpx;font-weight:600}

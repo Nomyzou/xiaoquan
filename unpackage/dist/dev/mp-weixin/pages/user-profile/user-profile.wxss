@@ -82,3 +82,13 @@
   text-decoration: underline;
   cursor: pointer;
 }
+.settings-btn {
+  position: fixed;
+  top: 40rpx;
+  right: 40rpx;
+  z-index: 100;
+  padding: 20rpx;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}

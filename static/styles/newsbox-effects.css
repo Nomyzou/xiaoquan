@@ -1,0 +1,127 @@
+/* Newsbox 特效样式库 */
+
+/* 火焰边框效果 */
+.flame-border {
+    position: relative;
+    border: none;
+    animation: burn 1.5s linear infinite;
+    box-shadow: 
+        0 0 5px rgba(255, 170, 0, 0.8), 
+        0 0 10px rgba(255, 170, 0, 0.6), 
+        0 0 20px rgba(255, 85, 0, 0.5), 
+        0 0 30px rgba(255, 0, 0, 0.4),
+        inset 0 0 5px rgba(255, 170, 0, 0.5),
+        inset 0 0 10px rgba(255, 85, 0, 0.4);
+}
+
+@keyframes burn {
+    0% {
+        box-shadow: 
+            0 0 5px rgba(255, 170, 0, 0.8), 
+            0 0 10px rgba(255, 170, 0, 0.6), 
+            0 0 20px rgba(255, 85, 0, 0.5), 
+            0 0 30px rgba(255, 0, 0, 0.4),
+            inset 0 0 5px rgba(255, 170, 0, 0.5),
+            inset 0 0 10px rgba(255, 85, 0, 0.4);
+    }
+    50% {
+        box-shadow: 
+            0 0 8px rgba(255, 170, 0, 0.9), 
+            0 0 15px rgba(255, 170, 0, 0.7), 
+            0 0 25px rgba(255, 85, 0, 0.6), 
+            0 0 35px rgba(255, 0, 0, 0.5),
+            inset 0 0 8px rgba(255, 170, 0, 0.6),
+            inset 0 0 15px rgba(255, 85, 0, 0.5);
+    }
+    100% {
+        box-shadow: 
+            0 0 5px rgba(255, 170, 0, 0.8), 
+            0 0 10px rgba(255, 170, 0, 0.6), 
+            0 0 20px rgba(255, 85, 0, 0.5), 
+            0 0 30px rgba(255, 0, 0, 0.4),
+            inset 0 0 5px rgba(255, 170, 0, 0.5),
+            inset 0 0 10px rgba(255, 85, 0, 0.4);
+    }
+}
+
+/* 霓虹灯效果 */
+.neon-border {
+    border: 2px solid transparent;
+    background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+    background-size: 400% 400%;
+    animation: neon 3s ease-in-out infinite;
+    position: relative;
+}
+
+.neon-border::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+    background-size: 400% 400%;
+    animation: neon 3s ease-in-out infinite;
+    z-index: -1;
+    border-radius: inherit;
+}
+
+@keyframes neon {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* 脉冲效果 */
+.pulse-border {
+    animation: pulse 2s infinite;
+    border: 2px solid #007bff;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+    }
+}
+
+/* 彩虹边框效果 */
+.rainbow-border {
+    border: 3px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080) border-box;
+    animation: rainbow 4s linear infinite;
+}
+
+@keyframes rainbow {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+/* 发光效果 */
+.glow-effect {
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+.glow-effect:hover {
+    box-shadow: 0 0 30px rgba(0, 123, 255, 0.8);
+    transform: translateY(-2px);
+}
+
+/* 3D悬浮效果 */
+.float-3d {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+    transition: transform 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.float-3d:hover {
+    transform: perspective(1000px) rotateX(5deg) rotateY(5deg) translateZ(20px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+} 

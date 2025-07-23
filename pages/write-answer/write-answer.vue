@@ -1,27 +1,26 @@
 <template>
-	<view class='page'>
-		<view class='header'>
-			<view class='exit'>
-				<u-icon name="close" size=25 @click="exit"></u-icon>
-			</view>
-			<view class='text'>写回答</view>
-			<view class='button'>
-				<u-button type="primary" shape="circle" text="发送" @click="onSubmit"></u-button>
-			</view>
+	<view class="write-answer-container">
+		<view class="question-title">
+			<text>{{title}}</text>
 		</view>
-		<view class='content'>
-			<view class='detail'>
-				<u-textarea v-model='answerContent' placeholder="请输入你的回答" height=400 border="none"></u-textarea>
-				<u-upload
-					:fileList="fileList"
-					@afterRead="afterRead"
-					@delete="deletePic"
-					multiple
-					:maxCount="10"
-					@success="uploadSuccess"
-					:previewFullImage="true"
-				></u-upload>
-			</view>
+		
+		<view class="answer-form">
+			<u-form :model="form" ref="uForm">
+				<u-form-item prop="content">
+					<u-textarea
+						v-model="form.content"
+						placeholder="请输入您的问题或回答内容..."
+						:height="300"
+						count
+						:maxlength="1000"
+						autoHeight
+					></u-textarea>
+				</u-form-item>
+			</u-form>
+		</view>
+		
+		<view class="submit-area">
+			<u-button type="primary" @click="submitAnswer">提交</u-button>
 		</view>
 	</view>
 </template>
@@ -30,121 +29,140 @@
 	export default {
 		data() {
 			return {
-				answerContent: '',
-				fileList: [],
-				picUrls: [],
-				discussionId: ''
-			};
+				discussionId: '', // 讨论ID
+				jobId: '', // 职位ID
+				title: '', // 标题
+				form: {
+					content: '' // 回答内容
+				},
+				type: '', // 类型：discussion或job
+				rules: {
+					content: [
+						{ required: true, message: '请输入内容', trigger: 'blur' }
+					]
+				}
+			}
 		},
 		onLoad(options) {
-			this.discussionId = options.discussionId;
-			console.log(this.discussionId,'id')
+			// 判断是讨论问答还是职位问答
+			if (options.discussionId) {
+				this.discussionId = options.discussionId;
+				this.title = decodeURIComponent(options.title || '');
+				this.type = 'discussion';
+			} else if (options.jobId) {
+				this.jobId = options.jobId;
+				this.title = decodeURIComponent(options.jobTitle || '职位咨询');
+				this.type = 'job';
+			}
 		},
 		methods: {
-			async onSubmit() {
-				const that = this;
-				let updateList = [...this.fileList];
-				updateList.forEach(item => {
-					item.status = 'uploading';
-					item.message = '正在上传';
-				});
-				uni.showToast({
-					title: '上传中',
-					icon: 'none'
-				});
-
-				// 触发视图更新
-				this.fileList = updateList;
-				updateList = await Promise.all(updateList.map(async (item) => {
-					try {
-						const cloudPath = `uploads/${Date.now()}-${Math.random()}.jpg`;
-						const result = await uniCloud.uploadFile({
-							cloudPath,
-							filePath: item.url
-						});
-						if (result.success) {
-							that.picUrls.push(result.fileID);
-							return {
-								url: result.fileID,
-								status: 'uploaded',
-								message: '上传成功',
-							};
+			submitAnswer() {
+				this.$refs.uForm.validate(valid => {
+					if (valid) {
+						if (this.type === 'discussion') {
+							this.submitDiscussionAnswer();
+						} else if (this.type === 'job') {
+							this.submitJobAnswer();
 						}
-					} catch (error) {
-						console.log('error', error);
-					}
-				}));
-				this.fileList = updateList;
-
-				// 提交回答
-				uniCloud.callFunction({
-					name: 'addAnswer',
-					data: {
-						discussionId: this.discussionId,
-						content: this.answerContent,
-						picUrls: this.picUrls
-					},
-					success: (res) => {
-						console.log('res', res);
-						uni.showToast({
-							title: '提交成功',
-							icon: 'success'
-						});
-						setTimeout(() => {
-							uni.navigateBack();
-						}, 1000);
-					},
-					fail: (err) => {
-						console.error('提交失败：', err);
-						uni.showToast({
-							title: '提交失败',
-							icon: 'none'
-						});
 					}
 				});
 			},
-			afterRead(e) {
-				let uplists = [].concat(e.file);
-				let fileList = this.fileList;
-				uplists.map((item) => {
-					fileList.push({
-						...item,
-						status: 'uploaded',
-						message: 'ok'
+			// 提交讨论回答
+			submitDiscussionAnswer() {
+				const userInfo = uni.getStorageSync('userInfo') || {};
+				
+				uniCloud.callFunction({
+					name: 'post_discussion_inner_anwser',
+					data: {
+						ID: this.discussionId,
+						content: this.form.content,
+						userInfo: userInfo
+					}
+				}).then(res => {
+					console.log('提交回答成功：', res);
+					
+					uni.showToast({
+						title: '回答已提交',
+						icon: 'success'
+					});
+					
+					// 通知上一页面更新数据
+					uni.$emit('answerUpdated', {
+						discussionId: this.discussionId
+					});
+					
+					setTimeout(() => {
+						uni.navigateBack();
+					}, 1500);
+				}).catch(err => {
+					console.error('提交回答失败：', err);
+					uni.showToast({
+						title: '提交失败，请重试',
+						icon: 'none'
 					});
 				});
 			},
-			deletePic(e) {
-				this.fileList.splice(e.index, 1);
-			},
-			exit() {
-				uni.navigateBack();
+			// 提交职位问答
+			submitJobAnswer() {
+				const userInfo = uni.getStorageSync('userInfo') || {};
+				
+				uniCloud.callFunction({
+					name: 'addJobAnswer',
+					data: {
+						jobId: this.jobId,
+						content: this.form.content,
+						userInfo: userInfo,
+						createTime: new Date().getTime()
+					}
+				}).then(res => {
+					console.log('提交问答成功：', res);
+					
+					uni.showToast({
+						title: '问题已提交',
+						icon: 'success'
+					});
+					
+					// 通知上一页面更新数据
+					uni.$emit('answerUpdated', {
+						jobId: this.jobId
+					});
+					
+					setTimeout(() => {
+						uni.navigateBack();
+					}, 1500);
+				}).catch(err => {
+					console.error('提交问题失败：', err);
+					uni.showToast({
+						title: '提交失败，请重试',
+						icon: 'none'
+					});
+				});
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
-.page {
-	display: flex;
-	flex-direction: column;
-	height: 1200rpx;
-	background-color: #FFF;
-
-	.header {
-		padding: 5rpx 20rpx;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-
-		.text {
-			font-size: 40rpx;
-			font-weight: 600;
-		}
+.write-answer-container {
+	padding: 30rpx;
+	
+	.question-title {
+		font-size: 36rpx;
+		font-weight: bold;
+		color: #333;
+		margin-bottom: 30rpx;
+		padding: 20rpx;
+		background-color: #f8f9fa;
+		border-radius: 12rpx;
+		box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
 	}
-
-	.content {
-		.detail {}
+	
+	.answer-form {
+		margin-bottom: 40rpx;
+	}
+	
+	.submit-area {
+		padding: 20rpx 0;
 	}
 }
 </style> 

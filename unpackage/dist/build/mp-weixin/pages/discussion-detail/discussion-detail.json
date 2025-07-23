@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "讨论详情",
+  "usingComponents": {
+    "u-button": "/uview-ui/components/u-button/u-button",
+    "q-abox": "/components/QAbox/QAbox"
+  }
+}

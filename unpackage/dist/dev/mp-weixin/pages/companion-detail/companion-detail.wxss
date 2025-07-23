@@ -84,3 +84,127 @@
 .employDetail .companyDetail .icon {
   padding: 40rpx 40rpx 0 40rpx;
 }
+.employDetail .jobDetail {
+  padding: 0 20rpx;
+}
+.employDetail .jobDetail .header {
+  font-weight: 600;
+  font-size: 40rpx;
+  margin-bottom: 20rpx;
+}
+.employDetail .jobDetail .detail ._p {
+  margin-bottom: 20rpx;
+  line-height: 1.6;
+}
+.employDetail .answer-section {
+  margin-top: 30rpx;
+}
+.employDetail .answer-section .answer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(120deg, #00c6fb 0%, #005bea 100%);
+  padding: 30rpx;
+  border-radius: 24rpx 24rpx 0 0;
+  box-shadow: 0 4rpx 20rpx rgba(0, 198, 251, 0.1);
+}
+.employDetail .answer-section .answer-header .answer-title .answer-count {
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: bold;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+.employDetail .answer-section .answer-header .write-answer-btn .button-text {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #fff;
+}
+.employDetail .answer-section .answer-box {
+  background: #fff;
+  border-radius: 0 0 24rpx 24rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.05);
+  min-height: 200rpx;
+}
+.employDetail .answer-section .answer-box .no-answer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+.employDetail .resume-button-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20rpx 0;
+  background-color: #fff;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  z-index: 9;
+}
+.employDetail .resume-button-container .resume-btn-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.employDetail .resume-button-container .resume-btn-content .resume-btn-text {
+  margin-left: 10rpx;
+  font-size: 32rpx;
+  color: #fff;
+  font-weight: bold;
+}
+.employDetail .resume-popup {
+  padding: 30rpx;
+}
+.employDetail .resume-popup .popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+.employDetail .resume-popup .popup-header .popup-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+.employDetail .resume-popup .resume-list {
+  max-height: 600rpx;
+  overflow-y: auto;
+}
+.employDetail .resume-popup .resume-list .resume-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx 20rpx;
+  border-bottom: 2rpx solid #f2f2f2;
+}
+.employDetail .resume-popup .resume-list .resume-item:active {
+  background-color: #f8f8f8;
+}
+.employDetail .resume-popup .resume-list .resume-item .resume-info {
+  display: flex;
+  flex-direction: column;
+}
+.employDetail .resume-popup .resume-list .resume-item .resume-info .resume-name {
+  font-size: 32rpx;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+.employDetail .resume-popup .resume-list .resume-item .resume-info .resume-date {
+  font-size: 24rpx;
+  color: #999;
+}
+.employDetail .resume-popup .resume-list .no-resume {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60rpx 0;
+  color: #999;
+  font-size: 28rpx;
+}

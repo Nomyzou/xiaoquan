@@ -5,7 +5,7 @@ exports.main = async (event, context) => {
   console.log('云函数开始执行');
   console.log('Received event:', JSON.stringify(event, null, 2));
 
-  const { discussionId, content, picUrls } = event;
+  const { discussionId, content, picUrls, userInfo, token } = event;
 
   // 确保必要的字段存在
   if (!discussionId || !content) {
@@ -25,14 +25,18 @@ exports.main = async (event, context) => {
       content,
       picUrls,
       openid,
-      createTime: Date.now()
+      createTime: Date.now(),
+      userInfo: {
+        nickName: userInfo.nickName,
+        avatarUrl: userInfo.avatarUrl
+      }
     };
 
     console.log('openid:', openid);
     console.log('Answer Object:', answer);
 
     // 检查文档是否存在
-    const docSnapshot = await db.collection('discussion-inner').doc(discussionId).get();
+    const docSnapshot = await db.collection('content-table').doc(discussionId).get();
     console.log('Document retrieved, count:', docSnapshot.data.length);
 
     if (!docSnapshot.data.length) {
@@ -47,7 +51,7 @@ exports.main = async (event, context) => {
     console.log('Document:', doc);
 
     // 更新 discussion-inner 表，将回答添加到 answers 数组
-    const res = await db.collection('discussion-inner').doc(discussionId).update({
+    const res = await db.collection('content-table').doc(discussionId).update({
       answers: db.command.push(answer) // 确保字段名为 answers
     });
 
