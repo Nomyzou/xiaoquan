@@ -224,6 +224,11 @@ var _default = {
   },
 
   methods: {
+    goToCreativePage: function goToCreativePage() {
+      uni.navigateTo({
+        url: '/pages/creative_page/creative_page'
+      });
+    },
     gotoDetail: function gotoDetail() {
       uni.navigateTo({
         url: "/pages/detail/detail"

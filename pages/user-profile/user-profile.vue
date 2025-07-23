@@ -12,7 +12,7 @@
 			</view>
 			
 			<view class='tabs' >
-				<view class='box'>
+				<view class='box' @click="goToCreativePage">
 					<view class='number'>0</view>
 					<view class='text'>创作</view>
 				</view>
@@ -32,8 +32,8 @@
 		</view>
 		<view class='recently-viewed'>
 			<view class='title'>最近游览</view>
-			<view class='newsbox' v-for='i in 10'>
-				<Newsbox @click.native="gotoDetail"></Newsbox>
+			<view class='newsbox' v-for='(item, index) in 10' :key="index">
+				<Newsbox @click="gotoDetail"></Newsbox>
 			</view>
 		</view>
 	</view>
@@ -50,6 +50,11 @@
 			};
 		},
 		methods:{
+			goToCreativePage() {
+				uni.navigateTo({
+					url: '/pages/creative_page/creative_page'
+				});
+			},
 			gotoDetail(){
 				uni.navigateTo({
 					url:"/pages/detail/detail"
